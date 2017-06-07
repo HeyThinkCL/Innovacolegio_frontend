@@ -1,0 +1,169 @@
+<div class="row">
+  <div class="col-sm-11 col-sm-offset-1">
+    <div class="title-bar">
+      <h2 class="title-bar-title"><span class="icon icon-fw icon-calendar-o"></span> Calendario Académico</h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title fw-l">Periodo Académico</h3>
+      </div>
+      <div class="card-body">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="form-control-1">Fecha Inicio</label>
+            <div class="col-sm-3">
+              <div class="input-with-icon">
+                <input class="form-control" id="form-control-1"
+                       [(ngModel)]="configuracion?.periodo_academico.fecha_inicio"
+                       ng2-datetime-picker
+                       close-on-select="true"
+                       date-only="true"
+                       date-format="DD-MM-YYYY">
+                <span class="icon icon-calendar input-icon"></span>
+              </div>
+            </div>
+            <label class="control-label col-sm-2" for="form-control-2">Fecha Término</label>
+            <div class="col-sm-3">
+              <div class="input-with-icon">
+                <input class="form-control" id="form-control-2"
+                       [(ngModel)]="configuracion?.periodo_academico.fecha_termino"
+                       ng2-datetime-picker
+                       close-on-select="true"
+                       date-only="true"
+                       date-format="DD-MM-YYYY">
+                <span class="icon icon-calendar input-icon"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="title-bar">
+          <div class="title-bar-actions">
+            <div class="btn-group-sm">
+              <button class="btn btn-outline-primary" (click)="addVacaciones()"><span class="btn-icon icon icon-fw icon-lg icon-calendar-plus-o"></span></button>
+            </div>
+          </div>
+          <h3 class="card-title fw-l">Vacaciones</h3>
+        </div>
+      </div>
+      <div class="card-header" *ngFor="let periodo of configuracion?.vacaciones; let currentIndex = index">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2 col-sm-offset-1">Glosa</label>
+            <div class="col-sm-6">
+              <input class="form-control" type="text" [(ngModel)]="periodo.glosa">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" >Fecha Inicio</label>
+            <div class="col-sm-3">
+              <div class="input-with-icon">
+                <input class="form-control"
+                       [(ngModel)]="periodo.fecha_inicio"
+                       ng2-datetime-picker
+                       close-on-select="true"
+                       date-only="true"
+                       date-format="DD-MM-YYYY">
+                <span class="icon icon-calendar input-icon"></span>
+              </div>
+            </div>
+            <label class="control-label col-sm-2" >Fecha Término</label>
+            <div class="col-sm-3">
+              <div class="input-with-icon">
+                <input class="form-control"
+                       [(ngModel)]="periodo.fecha_termino"
+                       ng2-datetime-picker
+                       close-on-select="true"
+                       date-only="true"
+                       date-format="DD-MM-YYYY">
+                <span class="icon icon-calendar input-icon"></span>
+              </div>
+            </div>
+            <div class="col-sm-1 col-sm-offset-1">
+              <div class="btn-group-sm">
+                <button class="btn btn-outline-danger" (click)="deleteFecha(periodo.id)"><span class="btn-icon icon icon-fw icon-calendar-minus-o"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="title-bar">
+          <div class="title-bar-actions">
+            <div class="btn-group-sm">
+              <button class="btn btn-outline-primary" (click)="addFechaEspecial()"><span class="btn-icon icon icon-fw icon-lg icon-calendar-plus-o"></span></button>
+            </div>
+          </div>
+          <h3 class="card-title fw-l">Fechas Especiales</h3>
+        </div>
+      </div>
+      <div class="card-header" *ngFor="let fecha of configuracion?.fechas_especiales; let currentIndex = index" >
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2 col-sm-offset-1">Glosa</label>
+            <div class="col-sm-6">
+              <input class="form-control" type="text" [(ngModel)]="fecha.glosa">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2 col-sm-offset-1" >Fecha</label>
+            <div class="col-sm-6">
+              <div class="input-with-icon">
+                <input class="form-control"
+                       [(ngModel)]="fecha.fecha_inicio"
+                       ng2-datetime-picker
+                       close-on-select="true"
+                       date-only="true"
+                       date-format="DD-MM-YYYY">
+                <span class="icon icon-calendar input-icon"></span>
+              </div>
+            </div>
+            <div class="col-sm-1 col-sm-offset-2">
+              <div class="btn-group-sm">
+                <button class="btn btn-outline-danger"  (click)="deleteFecha(fecha.id)"><span class="btn-icon icon icon-fw icon-calendar-minus-o"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-sm-8">
+          <button class="btn btn-primary btn-block" (click)="modalOpen()">Guardar</button>
+
+          <modal [animation]="true" #modal>
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">Guardar Configuración.</h4>
+            </modal-header>
+            <modal-body>
+              Presione Ok para continuar guardando la configuración.
+            </modal-body>
+            <modal-footer>
+              <button type="button" class="btn btn-primary" (click)="saveConfig()">Ok</button>
+            </modal-footer>
+          </modal>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,146 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="demo-form-wrapper">
+      <div class="form form-horizontal">
+        <div class="form-group form-group-lg">
+          <div class="col-md-7 col-md-offset-1">
+            <div class="input-with-icon">
+              <input class="form-control input-thick" type="text" placeholder="Buscar&hellip;" [(ngModel)]="filterData">
+              <span class="icon icon-search input-icon"></span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <a class="btn btn-lg btn-primary btn-block" [routerLink]="['../crear']">Crear Alumno</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <app-spinner [timeoutMessage]="timeoutMessage" *ngIf="!(matriculas.length>0)"></app-spinner>
+    <div class="panel" *ngIf="matriculas.length>0 && cursos.length>0">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-middle table-hover">
+            <thead>
+            <tr class="bg-primary">
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Rut</th>
+              <th>Curso</th>
+              <th>Fecha de Nacimiento</th>
+              <th>Sexo</th>
+              <th>Telefono</th>
+              <th>Estado</th>
+              <th>Desiste</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let matricula of matriculas | filterArray:filterData:filterKeys" [ngClass]="{'desiste':matricula.desiste }">
+              <td>
+	                <!--<span class="icon-with-child m-r">
+	                  <img class="circle" width="36" height="36" src="assets/img/3975409957.jpg">
+                    &lt;!&ndash;<span class="icon-child bg-warning circle sq-8"></span>&ndash;&gt;
+	                </span>-->
+                {{matricula.nombre}}
+              </td>
+              <td>
+                <strong>{{matricula.apellido_paterno}} {{matricula.apellido_materno}}</strong>
+              </td>
+              <td>
+                {{matricula.rut}}-{{matricula.dv}}
+              </td>
+              <td>
+                {{getCursoNameByCursoId(matricula.curso_id)}}
+              </td>
+              <td>
+                {{matricula.fecha_nac}}
+              </td>
+              <td>
+                {{matricula.sexo}}
+              </td>
+              <td>
+                {{matricula.fono_casa}}
+              </td>
+              <td>
+                {{matricula.estado}}
+              </td>
+              <td>
+                <button class="btn btn-sm btn-danger"
+                        (click)="desactivarModalOpen(matricula)"
+                        *ngIf="!matricula.desiste">
+                  <span class="icon icon-times-circle-o icon-fw" *ngIf="!matricula.desiste"></span>
+                </button>
+
+                <button class="btn btn-sm btn-info"
+                        (click)="activarModalOpen(matricula)" *ngIf="matricula.desiste">
+                  <span class="icon icon-circle-o icon-fw" *ngIf="matricula.desiste"></span>
+                </button>
+
+                <modal [animation]="true" #desactivarModal>
+                  <modal-header [show-close]="true">
+                    <h4 class="modal-title">Retirar Alumno</h4>
+                  </modal-header>
+                  <modal-body>
+                    Haga click en Ok para continuar retirando al alumno seleccionado.
+                  </modal-body>
+                  <modal-footer>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="desactivarModalDismiss()">Cancelar</button>
+                    <button type="button" class="btn btn-danger" (click)="desactivarModalClose()">Ok</button>
+                  </modal-footer>
+                </modal>
+
+                <modal [animation]="true" #activarModal>
+                  <modal-header [show-close]="true">
+                    <h4 class="modal-title">Reintegrar Alumno</h4>
+                  </modal-header>
+                  <modal-body>
+                    Haga click en Ok para continuar reintegrando al alumno seleccionado.
+                  </modal-body>
+                  <modal-footer>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="activarModalDismiss()">Cancelar</button>
+                    <button type="button" class="btn btn-info" (click)="activarModalClose()">Ok</button>
+                  </modal-footer>
+                </modal>
+              </td>
+              <td>
+                <div class="btn-toolbar pull-right">
+                  <div class="btn-group btn-group-sm">
+                    <a class="btn btn-primary btn-sm" [routerLink]="['./',matricula.id]">
+                      <span class="icon icon-eye icon-fw"></span>
+                    </a>
+                    <button class="btn btn-primary btn-sm" [routerLink]="['../editar',matricula.id]" [disabled]="matricula.desiste">
+                      <span class="icon icon-pencil-square-o icon-fw"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" (click)="modalOpen(matricula.id)">
+                      <span class="icon icon-times icon-fw"></span>
+                    </button>
+
+                    <modal [animation]="true" #modal>
+                      <modal-header [show-close]="true">
+                        <h4 class="modal-title">Eliminar Matricula</h4>
+                      </modal-header>
+                      <modal-body>
+                        Haga click en Ok para continuar eliminando la matricula seleccionada.
+                      </modal-body>
+                      <modal-footer>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modalDismiss()">Cancelar</button>
+                        <button type="button" class="btn btn-primary" (click)="modalClose(selectedMatricula_id)">Ok</button>
+                      </modal-footer>
+                    </modal>
+
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

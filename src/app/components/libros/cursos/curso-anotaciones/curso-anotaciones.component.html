@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <div class="card">
+      <div class="card-footer">
+        <div class="row gutter-xs">
+          <div class="col-sm-4" *ngFor="let tab of tabs">
+            <button class="btn btn-block btn-outline-info"
+                    [routerLink]="['.',tab.path]"
+                    [ngClass]="{'active': currentTabPath.includes(tab.path)}">
+              <span class="icon icon-fw" [ngClass]=tab.icon></span>
+              {{tab.label}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

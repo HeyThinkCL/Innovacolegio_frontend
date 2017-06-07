@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <!--<app-spinner [timeoutMessage]="" *ngIf="!(configuracion)"></app-spinner>-->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title fw-l">Creación de Asignaturas Electivas</h3>
+      </div>
+      <div class="card-body">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="form-control-1">Nombre de Asignatura</label>
+            <div class="col-sm-8">
+              <input class="form-control" id="form-control-1" type="text" [(ngModel)]="electivo.nombre">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="form-control-2">Cursos</label>
+            <div class="col-sm-8"  id="form-control-2-wrapper">
+              <select2 id="form-control-2"
+                       [data]="selectCursosData"
+                       [width]="520 | select2WidthFix:'form-control-2-wrapper'"
+                       [options]="selectCursosOptions"
+                       (valueChanged)="cursosChanged($event.value)"
+                       *ngIf="selectCursosRender"></select2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div *ngFor="let curso of selectedCursos" class="card-header">
+        <div class="media">
+          <div class="media-heading">
+            <h5 class="fw-l">{{curso.curso.grado}} {{curso.curso.curso}} <span class="fw-sb panel-info pull-right"> </span></h5>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-middle table-bordered table-hover">
+                <thead>
+                <tr class="bg-primary">
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Rut</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let alumno of curso.alumnos"
+                    (click)="selectAlumno(alumno.id)" [ngClass]="{'bg-info':include(selectedAlumnos,alumno.id)}">
+                  <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.nombre}}</td>
+                  <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.apellido_paterno}} {{alumno.apellido_materno}}</td>
+                  <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.rut}}-{{alumno.dv}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+
+        <div class="col-sm-8">
+          <button class="btn btn-info btn-block" (click)="saveElectivo()">Crear Electivo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal [animation]="true" #modal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Electivo creado con éxito.</h4>
+  </modal-header>
+  <modal-body>
+    <p>Presione <strong>Ok</strong> para continuar o <strong>Volver</strong> para salir</p>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-default" (click)="goBack()">Volver</button>
+    <button type="button" class="btn btn-primary" (click)="modalClose()">Ok</button>
+  </modal-footer>
+</modal>

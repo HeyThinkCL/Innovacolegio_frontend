@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8">
+            <button class="btn btn-block btn-success" (click)="saveAnotacion()"><span class="icon icon-fw icon-paper-plane-o"></span>Guardar</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="demo-form-wrapper">
+          <div class="form form-horizontal">
+            <div class="form-group">
+              <label for="form-2" class="col-sm-2 control-label form-label">Anotador</label>
+              <div class="col-sm-3">
+                <select id="form-2" class="form-control" [(ngModel)]="anotacion.funcionario_id">
+                  <option *ngFor="let funcionario of funcionarios"
+                          value="{{funcionario.id}}">{{ funcionario.usuario.nombre }} {{ funcionario.usuario.apellido_paterno }} {{ funcionario.usuario.apellido_materno }}</option>
+                </select>
+              </div>
+
+              <label for="form-1" class="col-sm-1 control-label form-label">Asignatura</label>
+              <div class="col-sm-2">
+                <select id="form-1" class="form-control" [(ngModel)]="anotacion.asignatura_id">
+                  <option *ngFor="let asignatura of asignaturas"
+                          value="{{asignatura?.asignatura.datos.id}}">{{ asignatura?.asignatura.datos.nombre | abbreviate }}</option>
+                </select>
+              </div>
+              <label class="col-sm-1 control-label" for="form-4">Fecha</label>
+              <div class="col-sm-3">
+                <div class="input-with-icon">
+                  <input id="form-4" class="form-control"
+                         [(ngModel)]="anotacion.fecha"
+                         ng2-datetime-picker
+                         close-on-select="true"
+                         date-only="true"
+                         date-format="DD-MM-YYYY">
+                  <span class="icon icon-calendar input-icon"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-2">Negativa/Positiva</label>
+              <div class="col-md-1">
+                <label class="switch"
+                       [ngClass]="{'switch-success': anotacion.tipo,'switch-danger-special': !(anotacion.tipo)}">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="anotacion.tipo">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="control-label col-md-1">General</label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" (change)="toggleGeneral()">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="control-label col-md-1" *ngIf="!(anotacion.general)">Seguimiento</label>
+              <div class="col-md-1" *ngIf="!(anotacion.general)">
+                <label class="switch switch-warning">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="anotacion.seguimiento">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="col-sm-1 control-label" for="form-control-3" *ngIf="!(anotacion.general)">Alumno</label>
+              <div class="col-sm-4" *ngIf="!(anotacion.general)">
+                <div class="input-group">
+                  <input id="form-control-3" class="form-control" type="text" [(ngModel)]="anotacion.alumno.fullname" readonly>
+                  <div class="input-group-btn">
+                    <button class="btn btn-outline-danger" (click)="clearSelectedAlumno()" [disabled]="!(anotacion.alumno.rut)"><span class="icon icon-close icon-fw"></span></button>
+                    <button class="btn btn-primary" (click)="modalOpen()"><span class="icon icon-user icon-fw"></span></button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-2">Observación</label>
+              <div class="col-sm-10">
+                <textarea id="form-control-2" class="form-control" style="height: 100px" [(ngModel)]="anotacion.observacion"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <modal [animation]="true" #modal>
+          <modal-header [show-close]="false">
+            <h4 class="modal-title">Inasistentes</h4>
+            <h5>{{selectedDay?.day.toString() | date }}</h5>
+          </modal-header>
+          <modal-body>
+            <div class="table-responsive" *ngIf="!(anotacion.general)">
+              <table class="table table-bordered table-hover">
+                <thead>
+                <tr class="bg-info">
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let alumno of alumnos" (click)="setSelectedAlumno(alumno)" [ngClass]="{'bg-info': alumno.rut == anotacion.alumno.rut,'bg-default':alumno.desiste}">
+                  <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.numero}}</td>
+                  <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.nombre}}</td>
+                  <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.apellido_paterno}} {{alumno.apellido_materno}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </modal-body>
+          <modal-footer>
+            <button type="button" class="btn btn-primary" (click)="modalClose()">Continuar</button>
+          </modal-footer>
+        </modal>
+
+        <modal [animation]="true" #confirm>
+          <modal-header [show-close]="true">
+            <h3 class="modal-title">{{confirmMessage}}</h3>
+          </modal-header>
+          <modal-body *ngIf="confirmErrorMessage.length>0">
+            <p class="card-text">{{confirmErrorMessage}}</p>
+          </modal-body>
+          <modal-footer>
+            <button type="button" class="btn btn-primary" (click)="confirmClose()">Continuar</button>
+          </modal-footer>
+        </modal>
+      </div>
+    </div>
+  </div>
+</div>

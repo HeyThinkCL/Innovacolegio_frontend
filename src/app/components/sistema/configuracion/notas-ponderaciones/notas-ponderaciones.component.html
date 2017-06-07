@@ -1,0 +1,168 @@
+<div class="row">
+  <div class="col-sm-11 col-sm-offset-1">
+    <div class="title-bar">
+      <h2 class="title-bar-title"><span class="icon icon-fw icon-check-square-o"></span> Notas y Ponderaciones</h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <app-spinner [timeoutMessage]="" *ngIf="!(configuracion)"></app-spinner>
+    <div class="card" *ngIf="configuracion">
+      <div class="card-header">
+        <h3 class="card-title fw-l">Configuración para cálculo de promedios.</h3>
+      </div>
+      <div class="card-body">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="form-control-1">N° de decimales</label>
+            <div class="col-sm-1">
+              <input class="form-control" id="form-control-1" type="number" [(ngModel)]="configuracion.notas.decimales">
+            </div>
+            <label class="control-label col-sm-4" for="form-control-2">Método de aproximación.</label>
+            <div class="col-sm-3">
+              <select class="form-control" id="form-control-2" type="number" [(ngModel)]="configuracion.notas.aprox">
+                <option value=true>Hacia arriba</option>
+                <option value=false>Truncado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <app-spinner [timeoutMessage]="" *ngIf="!(configuracion)"></app-spinner>
+    <div class="card" *ngIf="configuracion">
+      <div class="card-header">
+        <h3 class="card-title fw-l">Configuración de escalas de evaluación.</h3>
+      </div>
+      <div class="card-header">
+        <div class="media">
+          <div class="media-heading">
+            <h4 class="card-title fw-l">Escala Numérica 1.0 a 7.0 Educación Básica y Media<span class="icon icon-lock pull-right"></span></h4>
+          </div>
+          <div class="media-body">
+            <div class="media-middle">
+              <p><strong>Nota Mínima:</strong> 1.0</p>
+              <p><strong>Nota 60%:</strong> 4.0</p>
+              <p><strong>Nota Máxima:</strong> 7.0</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-header">
+        <div class="media">
+          <div class="media-body media-middle">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="form-control-3">Escalas Disponibles</label>
+                <div class="col-sm-8" id="form-control-3-wrapper">
+                  <select2 id="form-control-3"
+                           [value]="selectedEscalas"
+                           [data]="selectEscalasData"
+                           [width]="520 | select2WidthFix:'form-control-3-wrapper'"
+                           [options]="selectEscalasOptions"
+                           (valueChanged)="escalaChanged($event.value)"></select2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-header" *ngIf="checkEscala('1')" >
+        <div class="media">
+          <div class="media-heading">
+            <h4 class="card-title fw-l">Escala Numérica 0 a 100</h4>
+          </div>
+          <div class="media-body">
+            <div class="media-middle">
+              <p><strong>Nota Mínima:</strong> 0 (Equivalente a 1.0)</p>
+              <p><strong>Nota 60%:</strong> 60 (Equivalente a 4.0)</p>
+              <p><strong>Nota Máxima:</strong> 100 (Equivalente a 7.0)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-header" *ngIf="checkEscala('2')" >
+        <div class="media">
+          <div class="media-heading">
+            <h4 class="card-title fw-l">Escala Oficial Educación Parvularia</h4>
+          </div>
+          <div class="media-body">
+            <div class="media-middle">
+              <p>Sin Evidencias <strong>SE</strong></p>
+              <p>No Logrado <strong>NL</strong></p>
+              <p>Logrado Con Dificultad <strong>LCD</strong></p>
+              <p>Logrado Adecuado a lo Esperado <strong>LAE</strong></p>
+              <p>Logrado Sobre lo Esperado <strong>LSE</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-header" *ngIf="checkEscala('3')" >
+        <div class="media">
+          <div class="media-heading">
+            <h4 class="card-title fw-l">Escala Modificada Educación Parvularia</h4>
+          </div>
+          <div class="media-body">
+            <div class="media-middle">
+              <p>No Logrado <strong>NL</strong></p>
+              <p>Por Lograr <strong>PL</strong></p>
+              <p>Medianamente Logrado <strong>ML</strong></p>
+              <p>Logrado <strong>L</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-header" *ngIf="checkEscala('4')" >
+        <div class="media">
+          <div class="media-heading">
+            <h4 class="card-title fw-l">Escala Especial</h4>
+          </div>
+          <div class="media-body">
+            <div class="media-middle">
+              <p>Insuficiente <strong>I</strong> (equivalente a 1.0-3.9)</p>
+              <p>Suficiente <strong>S</strong> (equivalente a 4.0-4.9)</p>
+              <p>Bueno <strong>B</strong> (equivalente a 5.0-5.9)</p>
+              <p>Muy Bueno <strong>MB</strong> (equivalente a 6.0-7.0)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-sm-8">
+          <button class="btn btn-primary btn-block" (click)="modalOpen()">Guardar</button>
+
+          <modal [animation]="true" #modal>
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">Guardar Configuración.</h4>
+            </modal-header>
+            <modal-body>
+              Presione Ok para continuar guardando la configuración.
+            </modal-body>
+            <modal-footer>
+              <button type="button" class="btn btn-primary" (click)="saveConfig()">Ok</button>
+            </modal-footer>
+          </modal>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

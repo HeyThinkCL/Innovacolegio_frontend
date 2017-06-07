@@ -1,0 +1,294 @@
+<div class="row">
+  <div class="col-xs-12">
+    <app-spinner *ngIf="!(asignaturas.length>0 && notasCongif.notas && notasCongif.notas.decimales && notasCongif.notas.aprox)"></app-spinner>
+    <div class="panel" *ngIf="asignaturas.length>0 && notasCongif.notas && notasCongif.notas.decimales && notasCongif.notas.aprox">
+      <div class="panel-heading">
+        <div class="row gutter-xs">
+          <div class="col-md-8">
+            <div class="demo-btn-toolbar btn-toolbar">
+              <div class="btn-group">
+                <button class="btn btn-sm btn-outline-info"
+                        *ngFor="let asignatura of asignaturas"
+                        (click)="setAsignatura(asignatura?.asignatura.datos.id)"
+                        [ngClass]="{'active': (asignatura?.asignatura.datos.id == selectedAsignatura.datos.id)}">{{asignatura?.asignatura.datos.nombre}}</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-block btn-success" (click)="saveNotas()">
+              <span class="icon icon-fw icon-paper-plane-o"></span>
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+      <app-spinner [timeoutMessage]="" *ngIf="!(renderView)"></app-spinner>
+      <div class="panel-body" *ngIf="renderView&&selectedAsignaturaAlumnos&&selectedAsignatura">
+        <div class="table-responsive">
+          <table class="table table-middle table-striped table-bordered table-hover">
+            <thead>
+            <tr class="bg-primary">
+              <th rowspan="2">N°</th>
+              <th rowspan="2" >Nombre</th>
+              <th rowspan="2">Apellidos</th>
+              <th rowspan="1" [attr.colspan]="selectedAsignatura.info_notas.length + 1" class="text-center">
+                <div class="btn-group pull-right">
+                  <button class="btn btn-info btn-sm" (click)="modalCreateOpen()"><span class="icon icon-fw icon-plus"></span></button>
+                </div>
+                Notas
+                <div class="btn-group pull-left">
+                  <button class="btn btn-info btn-sm" (click)="modalDeleteOpen()" [disabled]="selectedAsignatura.datos.electivo"><span class="icon icon-fw icon-minus"></span></button>
+                </div>
+              </th>
+            </tr>
+            <tr class="bg-primary">
+              <th rowspan="1" colspan="1"
+                  *ngFor="let item of createRange(selectedAsignatura.info_notas.length); let currentIndex = index"
+                  (click)="modalInfoOpen(currentIndex)">{{currentIndex+1}}<span class="pull-right icon icon-commenting-o"></span></th>
+              <th rowspan="1" colspan="1" (click)="modalConfigInfoOpen()">Prom<span class="pull-right icon icon-commenting-o"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let alumno of selectedAsignaturaAlumnos; let alumnoIdx = index">
+              <td [ngClass]="{'desiste':alumno.alumno.desiste }">{{alumno.alumno.lista}}</td>
+              <td [ngClass]="{'desiste':alumno.alumno.desiste }">{{alumno.alumno.nombre}}</td>
+              <td [ngClass]="{'desiste':alumno.alumno.desiste }">{{alumno.alumno.apellido_paterno}} {{alumno.alumno.apellido_materno}}</td>
+              <td *ngFor="let nota of alumno.notas; let notaIdx = index"
+                  [ngClass]="{'has-warning':(nota.valor == null),
+                              'has-error': !((nota.valor < 7.0)||(nota.valor > 1.0))}">
+                <input class="form-control" id="{{nota.id}}" *ngIf="!(selectedAsignatura.eval)"
+                       style="width:50px"
+                       type="number"
+                       min="1.0"
+                       max="7.0"
+                       step="0.01"
+                       value="nota.valor"
+                       [(ngModel)]="nota.valor"
+                       [disabled]="alumno.alumno.desiste"
+                       (keypress)="restrictValue(nota)"
+                       (keydown)="restrictValue(nota); checkTab($event,alumnoIdx,notaIdx)"
+                       (keyup)="restrictValue(nota)"
+                       (ngModelChange)="restrictValue(nota)"
+                       (change)="onChange(nota)"/>
+
+                <input class="form-control" id="{{nota.id}}" *ngIf="selectedAsignatura.eval==1"
+                       style="width:50px"
+                       type="number"
+                       min="0.0"
+                       max="100.0"
+                       step="1"
+                       [(ngModel)]="nota.valor"
+                       [disabled]="alumno.alumno.desiste"
+                       (keypress)="restrictValue(nota)"
+                       (keydown)="restrictValue(nota); checkTab($event,alumnoIdx,notaIdx)"
+                       (keyup)="restrictValue(nota)"
+                       (ngModelChange)="restrictValue(nota)"
+                       (change)="onChange(nota)"/>
+
+                <select class="form-control"
+                        id="{{nota.id}}"
+                        [disabled]="alumno.alumno.desiste"
+                        *ngIf="selectedAsignatura.eval==2"
+                        type="number"
+                        [(ngModel)]="nota.valor"
+                        (keydown)="checkTab($event,alumnoIdx,notaIdx)"
+                        (ngModelChange)="discreteValue(nota);onChange(nota)">
+                  <option [value]="null" selected>SE</option>
+                  <option [value]="3">NL</option>
+                  <option [value]="4">LCD</option>
+                  <option [value]="5">LAE</option>
+                  <option [value]="7">LSE</option>
+                </select>
+
+                <select class="form-control"
+                        id="{{nota.id}}"
+                        [disabled]="alumno.alumno.desiste"
+                        *ngIf="selectedAsignatura.eval==3"
+                        type="number"
+                        [(ngModel)]="nota.valor"
+                        (keydown)="checkTab($event,alumnoIdx,notaIdx)"
+                        (ngModelChange)="discreteValue(nota);onChange(nota)">
+                  <option [value]="null" selected></option>
+                  <option [value]="3">NL</option>
+                  <option [value]="4">PL</option>
+                  <option [value]="5">ML</option>
+                  <option [value]="7">L</option>
+                </select>
+
+                <select class="form-control"
+                        id="{{nota.id}}"
+                        [disabled]="alumno.alumno.desiste"
+                        *ngIf="selectedAsignatura.eval==4"
+                        type="number"
+                        [(ngModel)]="nota.valor"
+                        (keydown)="checkTab($event,alumnoIdx,notaIdx)"
+                        (ngModelChange)="discreteValue(nota);onChange(nota)">
+                  <option [value]="null" selected></option>
+                  <option [value]="3">I</option>
+                  <option [value]="4">S</option>
+                  <option [value]="5">B</option>
+                  <option [value]="7">MB</option>
+                </select>
+              </td>
+              <td>{{ alumno.notas | calcPromedio:selectedAsignatura.info_notas:notasCongif | number:decimals | showEvalEspecial:selectedAsignatura.eval }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal [animation]="true" #modalDelete>
+  <modal-header [show-close]="true">
+    <h3 class="modal-title">Eliminar Evaluación</h3>
+  </modal-header>
+  <modal-body>
+    <p class="card-text"></p>
+    <div class="demo-form-wrapper">
+      <div class="form form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="form-control-3">Nota - Contenido</label>
+          <div class="col-sm-7">
+            <select id="form-control-4"
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="index"
+                    (ngModelChange)="setNotaToDelete(index)">
+              <option disabled selected [value]="null"> Seleccionar Nota </option>
+              <option *ngFor="let eval of selectedAsignatura.info_notas; let i = index" [value]="i">{{i+1}} - {{eval.contenido}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-middle table-striped table-bordered table-hover">
+          <thead>
+            <tr class="bg-primary">
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let nota of notaToDelete.notas">
+              <td>{{nota.alumno.lista}}</td>
+              <td>{{nota.alumno.nombre}}</td>
+              <td>{{nota.alumno.apellido_paterno}} {{nota.alumno.apellido_materno}}</td>
+              <td>{{nota.nota.valor}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-default" (click)="modalDeleteDismiss()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="modalDeleteClose()">Continuar</button>
+  </modal-footer>
+</modal>
+
+<modal [animation]="true" #modalCreate>
+  <modal-header [show-close]="true">
+    <h3 class="modal-title">Crear Evaluación</h3>
+  </modal-header>
+  <modal-body>
+    <p class="card-text"></p>
+    <div class="demo-form-wrapper">
+      <div class="form form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-1 control-label" for="form-control-1">Contenido</label>
+          <div class="col-sm-10">
+            <input id="form-control-1"
+                   class="form-control"
+                   type="text"
+                   [(ngModel)]="createdNota.contenido">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-offset-1 control-label" for="form-control-2">Fecha de Evaluación</label>
+          <div class="col-sm-4">
+            <div class="input-with-icon">
+              <input id="form-control-2"
+                     class="form-control"
+                     [(ngModel)]="createdNota.fecha"
+                     ng2-datetime-picker
+                     close-on-select="true"
+                     date-only="true"
+                     date-format="DD-MM-YYYY">
+              <span class="icon icon-calendar input-icon"></span>
+            </div>
+          </div>
+          <!--<div class="input-with-icon">
+            <input class="form-control" id="form-control-46"
+
+                   ng2-datetime-picker
+                   close-on-select="true"
+                   date-only="true"
+                   date-format="DD-MM-YYYY">
+            <span class="icon icon-calendar input-icon"></span>
+          </div>-->
+
+          <label class="col-sm-1 control-label" for="form-control-3">Coeficiente</label>
+          <div class="col-sm-2">
+            <input id="form-control-3"
+                   class="form-control"
+                   type="number" min="1" max="2"
+                   [(ngModel)]="createdNota.coeficiente">
+          </div>
+        </div>
+      </div>
+    </div>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-default" (click)="modalCreateDismiss()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="modalCreateClose()" [disabled]="!(createdNota.coeficiente)">Continuar</button>
+  </modal-footer>
+</modal>
+
+<modal [animation]="true" #modalInfo>
+  <modal-header [show-close]="true">
+    <h3 class="modal-title">Evaluación</h3>
+  </modal-header>
+  <modal-body>
+    <p class="card-text">Contenido: {{infoNota.contenido}}</p>
+    <p class="card-text">Fecha de Evaluación: {{infoNota.fecha}}</p>
+    <p class="card-text">Coeficiente: {{infoNota.coeficiente}}</p>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="modalInfoClose()">Continuar</button>
+  </modal-footer>
+</modal>
+
+<modal [animation]="true" #modalConfirm>
+  <modal-header [show-close]="true">
+    <h3 class="modal-title">Información guardada con éxito.</h3>
+  </modal-header>
+  <modal-body>
+    Presione ok para continuar.
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="modalConfirmClose()">Continuar</button>
+  </modal-footer>
+</modal>
+
+<modal [animation]="true" #modalConfigInfo>
+  <modal-header [show-close]="true">
+    <h3 class="modal-title">Configuración de Promedio</h3>
+  </modal-header>
+  <modal-body *ngIf="notasCongif.notas">
+    <p class="card-text">Decimales: {{notasCongif?.notas.decimales}}</p>
+    <p class="card-text">Método de Aproximación: {{notasCongif?.notas.aprox? 'Hacia Arriba' : 'Truncado' }}</p>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="modalConfigInfoClose()">Continuar</button>
+  </modal-footer>
+</modal>
+
+

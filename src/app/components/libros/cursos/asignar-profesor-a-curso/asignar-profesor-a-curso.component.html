@@ -1,0 +1,55 @@
+<div class="title-bar">
+  <h1 class="title-bar title">Asignar Profesor</h1>
+  <p class="title bar description"></p>
+
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-1">
+    <app-spinner [timeoutMessage]="timeoutMessage" *ngIf="!(profesores.length>0)"></app-spinner>
+    <div class="demo-form-wrapper" *ngIf="profesores.length>0">
+      <div class="form form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-control-1">Profesor</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="form-control-1" type="text" [(ngModel)]="curso?.curso.profesor_id">
+              <option *ngFor="let profesor of profesores"
+                      [ngValue]="profesor?.id">
+                {{ profesor?.usuario?.nombre }} {{ profesor?.usuario.apellido_paterno }} {{ profesor?.usuario.apellido_materno }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-1">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-2 col-sm-offset-2">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-sm-8">
+          <button class="btn btn-primary btn-block" (click)="saveCurso()" [disabled]="!(curso?.curso.id)">Guardar</button>
+
+          <modal [animation]="true" #modal>
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">Profesor Asignado.</h4>
+            </modal-header>
+            <modal-body>
+              El profesor ha sido asignado con éxito.
+              Presione Ok para continuar.
+            </modal-body>
+            <modal-footer>
+              <button type="button" class="btn btn-primary" (click)="modalClose()">Ok</button>
+            </modal-footer>
+          </modal>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

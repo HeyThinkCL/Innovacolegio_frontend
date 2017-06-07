@@ -1,20 +1,337 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=" />
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/docs/ts/latest/tutorial/">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="layout-header">
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <a class="navbar-brand navbar-brand-center" [routerLink]="['./']">
+        <p class="fw-n text-white">InnovaColegios</p>
+      </a>
+      <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse" data-target="#sidenav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="bars">
+          <span class="bar-line bar-line-1 out"></span>
+          <span class="bar-line bar-line-2 out"></span>
+          <span class="bar-line bar-line-3 out"></span>
+        </span>
+        <span class="bars bars-x">
+          <span class="bar-line bar-line-4"></span>
+          <span class="bar-line bar-line-5"></span>
+        </span>
+      </button>
+      <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="arrow-up"></span>
+        <span class="ellipsis ellipsis-vertical"></span>
+      </button>
+    </div>
+    <div class="navbar-toggleable">
+      <nav id="navbar" class="navbar-collapse collapse">
+        <button class="sidenav-toggler hidden-xs" title="Collapse sidenav ( [ )" aria-expanded="true" type="button">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="bars">
+            <span class="bar-line bar-line-1 out"></span>
+            <span class="bar-line bar-line-2 out"></span>
+            <span class="bar-line bar-line-3 out"></span>
+            <span class="bar-line bar-line-4 in"></span>
+            <span class="bar-line bar-line-5 in"></span>
+            <span class="bar-line bar-line-6 in"></span>
+          </span>
+        </button>
 
+        <ul class="nav navbar-nav navbar-right">
+          <li class="hidden-xs">
+            <span *ngIf="colegioImg"><img class="img-circle sq-36" [src]="colegioImg | colegioImgFilter:colegios"></span>
+          </li>
+          <li class="hidden-xs">
+            <span class="navbar-btn navbar-account-btn fw-n">
+              {{colegioName | colegioNameFilter:colegios }}
+            </span>
+          </li>
+          <!--<li class="hidden-xs hidden-sm">
+            <form class="navbar-search navbar-search-collapsed">
+              <div class="navbar-search-group">
+                <input class="navbar-search-input" type="text" placeholder="Search for people, companies, and more&hellip;">
+                <button class="navbar-search-toggler" title="Expand search form ( S )" aria-expanded="false" type="submit">
+                  <span class="icon icon-search icon-lg"></span>
+                </button>
+                <button class="navbar-search-adv-btn" type="button">Advanced</button>
+              </div>
+            </form>
+          </li>-->
+          <!--<li class="dropdown">
+            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true">
+              <span class="icon-with-child hidden-xs">
+                <span class="icon icon-envelope-o icon-lg"></span>
+                <span class="badge badge-danger badge-above right">1</span>
+              </span>
+              <span class="visible-xs-block">
+                <span class="icon icon-envelope icon-lg icon-fw"></span>
+                <span class="badge badge-danger pull-right">1</span>
+                Messages
+              </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+              <div class="dropdown-header">
+                <a class="dropdown-link" href="compose.html">New Message</a>
+                <h5 class="dropdown-heading">Recent messages</h5>
+              </div>
+              <div class="dropdown-body">
+                <div class="list-group list-group-divided custom-scrollbar">
+                  <a class="list-group-item" href="#">
+                    <div class="notification">
+                      <div class="notification-media">
+                        <img class="rounded" width="40" height="40" src="/assets/img/0310728269.jpg" alt="Daniel Taylor">
+                      </div>
+                      <div class="notification-content">
+                        <small class="notification-timestamp">2 hr</small>
+                        <h5 class="notification-heading">Daniel Taylor</h5>
+                        <p class="notification-text">
+                          <small class="truncate">what</small>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="dropdown-footer">
+                <a class="dropdown-btn" href="#">See All</a>
+              </div>
+            </div>
+          </li>-->
+          <!--<li class="dropdown">
+            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true">
+              <span class="icon-with-child hidden-xs">
+                <span class="icon icon-bell-o icon-lg"></span>
+                <span class="badge badge-danger badge-above right">1</span>
+              </span>
+              <span class="visible-xs-block">
+                <span class="icon icon-bell icon-lg icon-fw"></span>
+                <span class="badge badge-danger pull-right">1</span>
+                Notifications
+              </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+              <div class="dropdown-header">
+                <a class="dropdown-link" href="#">Mark all as read</a>
+                <h5 class="dropdown-heading">Recent Notifications</h5>
+              </div>
+              <div class="dropdown-body">
+                <div class="list-group list-group-divided custom-scrollbar">
+                  <a class="list-group-item" href="#">
+                    <div class="notification">
+                      <div class="notification-media">
+                        <span class="icon icon-exclamation-triangle bg-warning rounded sq-40"></span>
+                      </div>
+                      <div class="notification-content">
+                        <small class="notification-timestamp">35 min</small>
+                        <h5 class="notification-heading">Update Status</h5>
+                        <p class="notification-text">
+                          <small class="truncate">Failed to get available update data. To ensure the proper functioning of your application, update now.</small>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="dropdown-footer">
+                <a class="dropdown-btn" href="#">See All</a>
+              </div>
+            </div>
+          </li>-->
+          <li class="dropdown hidden-xs">
+            <button class="navbar-btn navbar-account-btn" data-toggle="dropdown" aria-haspopup="true">
+              <span class="rounded icon icon-user"></span>
+              <span class="fz-sm fw-n">{{currentUser.nombre}} {{currentUser.apellido}}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <!--<li>
+                <a href="upgrade.html">
+                  <h5 class="navbar-upgrade-heading">
+                    Upgrade Now
+                    <small class="navbar-upgrade-notification">You have 15 days left in your trial.</small>
+                  </h5>
+                </a>
+              </li>-->
+              <li class="navbar-upgrade-version">Version: {{version}}</li>
+              <li class="divider"></li>
+              <li><span class="navbar-upgrade-version">Sesión:</span> {{currentUser.sesion}}</li>
+              <li class="divider"></li>
+              <li (click)="logout()">
+                <a>
+                  <span class="icon icon-power-off icon-lg icon-fw"></span>
+                  Cerrar Sesión
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="visible-xs-block">
+            <span class="navbar-upgrade-version">Version: {{version}}</span>
+            <span><span class="navbar-upgrade-version">Sesión:</span> {{currentUser.sesion}}</span>
+            <a (click)="logout()">
+              <span class="icon icon-power-off icon-lg icon-fw"></span>
+              Cerrar Sesión
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="layout-main">
+  <div class="layout-sidebar">
+    <div class="layout-sidebar-backdrop"></div>
+    <div class="layout-sidebar-body">
+      <div class="custom-scrollbar">
+        <nav id="sidenav" class="sidenav-collapse collapse">
+          <ul class="sidenav">
+            <!--<li class="sidenav-search hidden-md hidden-lg">
+              <form class="sidenav-form" action="/">
+                <div class="form-group form-group-sm">
+                  <div class="input-with-icon">
+                    <input class="form-control" type="text" placeholder="Search…">
+                    <span class="icon icon-search input-icon"></span>
+                  </div>
+                </div>
+              </form>
+            </li>-->
+
+            <li class="sidenav-item" routerLinkActive="active">
+              <a [routerLink]="['dashboard']"  aria-haspopup="true">
+                <span class="sidenav-icon icon icon-home"></span>
+                <span class="sidenav-label">Dashboard</span>
+              </a>
+            </li>
+
+            <li class="sidenav-heading" *ngIf="getUserRol()==1">Sostenedor</li>
+            <li class="sidenav-item has-subnav" routerLinkActive="active" *ngIf="getUserRol()==1">
+              <a [routerLink]="['sistema/colegios']">
+                <span class="sidenav-icon icon icon-institution"></span>
+                <span class="sidenav-label">Colegios</span>
+              </a>
+              <ul class="sidenav-subnav collapse" routerLinkActive="active">
+                <li class="sidenav-subheading">Colegios</li>
+                <li routerLinkActive="active" [routerLink]="['sistema/colegios/ver']"><a>Ver Colegios</a></li>
+                <li routerLinkActive="active" [routerLink]="['sistema/colegios/crear']"><a>Crear Colegio</a></li>
+              </ul>
+            </li>
+
+            <li class="sidenav-heading">Sistema</li>
+
+            <li class="sidenav-item has-subnav" routerLinkActive="active"  *ngIf="!(getUserRol()==4)&&!(getUserRol()==5)">
+              <a [routerLink]="['sistema/configuracion']">
+                <span class="sidenav-icon icon icon-cogs"></span>
+                <span class="sidenav-label">Configuración</span>
+              </a>
+              <ul class="sidenav-subnav collapse" routerLinkActive="active">
+                <li class="sidenav-subheading">Configuración</li>
+                <li routerLinkActive="active" *ngFor="let configRoute of configRoutes | filterConfigs:getColegioId()"
+                    [routerLink]="['sistema/configuracion/',configRoute.path]"
+                    (click)="goToConfigRoute(configRoute.id)"><a *ngIf="!(configRoute.glosa=='Jornada')">{{configRoute.glosa}}</a></li>
+              </ul>
+            </li>
+            <li class="sidenav-item has-subnav" routerLinkActive="active"  *ngIf="!(getUserRol()==4)">
+              <a [routerLink]="['sistema/funcionarios']">
+                <span class="sidenav-icon icon icon-users"></span>
+                <span class="sidenav-label">Funcionarios</span>
+              </a>
+              <ul class="sidenav-subnav collapse" routerLinkActive="active">
+                <li class="sidenav-subheading">Funcionarios</li>
+                <li routerLinkActive="active" [routerLink]="['sistema/funcionarios/ver']"><a>Ver Funcionarios</a></li>
+                <li routerLinkActive="active" [routerLink]="['sistema/funcionarios/crear']"><a>Crear Funcionarios</a></li>
+              </ul>
+            </li>
+            <li class="sidenav-item has-subnav" routerLinkActive="active">
+              <a [routerLink]="['sistema/postulaciones']">
+                <span class="sidenav-icon icon icon-folder-open"></span>
+                <span class="sidenav-label">Postulaciones</span>
+              </a>
+              <ul class="sidenav-subnav collapse" routerLinkActive="active">
+                <li class="sidenav-subheading">Postulaciones</li>
+                <li routerLinkActive="active" [routerLink]="['sistema/postulaciones/dashboard']"><a>Ver Postulaciones</a></li>
+                <li routerLinkActive="active" [routerLink]="['sistema/postulaciones/crear']"><a>Crear Postulación</a></li>
+              </ul>
+            </li>
+            <li class="sidenav-item has-subnav" routerLinkActive="active" *ngIf="!(getUserRol()==5)">
+              <a [routerLink]="['sistema/matriculas']">
+                <span class="sidenav-icon icon icon-folder"></span>
+                <span class="sidenav-label">Matriculas</span>
+              </a>
+              <ul class="sidenav-subnav collapse" routerLinkActive="active">
+                <li class="sidenav-subheading">Matriculas</li>
+                <li routerLinkActive="active" [routerLink]="['sistema/matriculas/ver']"><a>Ver Matriculas</a></li>
+                <li routerLinkActive="active" [routerLink]="['sistema/matriculas/crear']"><a>Crear Matricula</a></li>
+              </ul>
+            </li>
+            <li class="sidenav-heading">Modulos</li>
+            <li class="sidenav-item has-subnav" routerLinkActive="active"  *ngIf="!(getUserRol()==4)">
+              <!--<a [routerLink]="['libros']">-->
+              <a>
+                <span class="sidenav-icon icon icon-book"></span>
+                <span class="sidenav-label">Libros de Clases</span>
+              </a>
+              <ul class="sidenav-subnav collapse" routerLinkActive="active">
+                <li class="sidenav-subheading">Libros de Clases</li>
+                <li routerLinkActive="active" [routerLink]="['libros/ver-cursos']"><a>Cursos</a></li>
+                <li routerLinkActive="active" [routerLink]="['libros/crear-curso']"><a>Crear Curso</a></li>
+                <li routerLinkActive="active" [routerLink]="['libros/profesores']"><a>Profesores</a></li>
+                <li routerLinkActive="active" [routerLink]="['libros/asignaturas']"><a>Asignaturas</a></li>
+                <li routerLinkActive="active" [routerLink]="['libros/electivos']"><a>Electivos</a></li>
+              </ul>
+            </li>
+            <li class="sidenav-item has-subnav" routerLinkActive="active"  *ngIf="!(getUserRol()==5)">
+              <a>
+                <span class="sidenav-icon icon icon-files-o"></span>
+                <span class="sidenav-label">Documentos</span>
+              </a>
+              <ul class="sidenav-subnav collapse" routerLinkActive="active">
+                <li class="sidenav-subheading">Documentos</li>
+                <li routerLinkActive="active" [routerLink]="['docs/informes']"><a>Informes</a></li>
+                <li routerLinkActive="active" [routerLink]="['docs/certificados']"><a>Certificados</a></li>
+                <!--<li routerLinkActive="active" [routerLink]="['docs/citaciones']"><a>Citaciones</a></li>-->
+              </ul>
+            </li>
+            <li class="sidenav-item" routerLinkActive="active"  *ngIf="false">
+              <a [routerLink]="['cierre']">
+                <span class="sidenav-icon icon icon-calendar-check-o"></span>
+                <span class="sidenav-label">Cierre de Año</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="layout-content">
+    <div class="layout-content-body">
+      <!--div class="title-bar">
+        <div class="title-bar-actions">
+          <select class="selectpicker dropdown" name="period" data-dropdown-align-right="true" data-style="btn-default btn-sm" data-width="fit">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="last_7d" selected="selected">Last 7 days</option>
+            <option value="last_1m">Last 30 days</option>
+            <option value="last_3m">Last 90 days</option>
+          </select>
+        </div>
+        <h1 class="title-bar-title">
+          <span class="d-ib">Dashboard</span>
+          <span class="d-ib">
+            <a class="title-bar-shortcut" href="#" title="Add to shortcut list" data-container="body" data-toggle-text="Remove from shortcut list" data-trigger="hover" data-placement="right" data-toggle="tooltip">
+              <span class="sr-only">Add to shortcut list</span>
+            </a>
+          </span>
+        </h1>
+        <p class="title-bar-description">
+          <small>You can personalize your dashboard by using <a href="widgets.html">widgets</a>.</small>
+        </p>
+      </div-->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="layout-footer">
+    <div class="layout-footer-body">
+      <small class="version">Version {{ version }}</small>
+      <small class="copyright">2017 &copy; HeyThink</small>
+    </div>
+  </div>
+</div>

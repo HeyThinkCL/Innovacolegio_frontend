@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-xs-12">
+    <app-spinner *ngIf="!(alumnos.length>0)"></app-spinner>
+    <div class="panel" *ngIf="alumnos.length>0">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-middle table-bordered table-hover">
+            <thead>
+            <tr class="bg-primary">
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Rut</th>
+              <th>Anotaciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let alumno of alumnos" (click)="modalOpen(alumno)" [ngClass]="{'bg-info': alumno.id == selectedAlumno.id}">
+              <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.nombre}}</td>
+              <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.apellido_paterno}} {{alumno.apellido_materno}}</td>
+              <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.rut}}-{{alumno.dv}}</td>
+              <td>{{alumno?.anotaciones?.length}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <modal [animation]="true" #modal>
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">Anotaciones</h4>
+              <h5>{{ selectedAlumno?.nombre }} {{ selectedAlumno?.apellido_paterno }} {{ selectedAlumno?.apellido_materno }}</h5>
+              <h6>{{ selectedAlumno?.rut }}</h6>
+            </modal-header>
+            <modal-body>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                      <tr class="bg-info">
+                        <th>Fecha</th>
+                        <th>Anotador</th>
+                        <th>Asignatura</th>
+                        <th>Caract.</th>
+                        <th>Observacion</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let anotacion of selectedAlumno?.anotaciones">
+                        <td>{{anotacion.fecha_anotacion.toString() | date }}</td>
+                        <td>{{anotacion.profesor.nombre}} {{anotacion.profesor.apellido_paterno}}</td>
+                        <td>{{anotacion.asignatura.nombre}}</td>
+                        <td>
+                          <span class="label label-info label-pill" *ngIf="anotacion.general">General</span>
+                          <span class="label label-danger label-pill" *ngIf="!(anotacion.tipo)">Negativa</span>
+                          <span class="label label-success label-pill" *ngIf="anotacion.tipo">Positiva</span>
+                          <span class="label label-warning label-pill" *ngIf="anotacion.seguimiento">Seguimiento</span>
+                        </td>
+                        <td>
+                          <div>
+                            <a class="btn btn-expander btn-info collapsed"
+                               role="button"
+                               data-toggle="collapse"
+                               (click)="toggleShow(anotacion)">
+                              &hellip;
+                            </a>
+                            <p class="text-justify card-text" *ngIf="!(anotacion.show)">{{ anotacion.observacion | truncate: 60 }}</p>
+                          </div>
+                          <div *ngIf="anotacion.show">
+                            <p class="text-justify card-text">
+                              <small>{{ anotacion.observacion }}</small>
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </modal-body>
+            <modal-footer>
+              <button type="button" class="btn btn-primary" (click)="modalClose()">Ok</button>
+            </modal-footer>
+          </modal>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

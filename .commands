@@ -1,0 +1,14 @@
+npm install -g @angular/cli@latest
+npm install --save-dev @angular/cli@latest
+npm install
+npm install date-fns
+npm install ng2-bs3-modal
+npm install bootstrap@3.3.7
+npm install ng2-charts
+npm install ng2-datetime-picker
+npm install ng2-select2
+npm install select2
+npm install moment
+npm install "git+https://github.com/mattlewis92/calendar-utils.git"
+npm install angular2-moment
+npm install jquery

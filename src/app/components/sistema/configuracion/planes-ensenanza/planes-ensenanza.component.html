@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-sm-11 col-sm-offset-1">
+    <div class="title-bar">
+      <h2 class="title-bar-title"><span class="icon icon-fw icon-graduation-cap"></span> Planes de Estudio y Tipos de Enseñanza</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="card" *ngIf="!lock">
+      <div class="card-header">
+        <h3 class="card-title fw-l">Planes de Estudio</h3>
+      </div>
+      <div class="card-body">
+        <div class="media">
+          <div class="media-body media-middle">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <div class="col-sm-10" id="form-control-1-wrapper">
+                  <select2 id="form-control-1"
+                           [data]="selectPlanesData"
+                           [width]="520 | select2WidthFix:'form-control-1-wrapper'"
+                           [options]="selectPlanesOptions"
+                           [value]="selectedPlanes"
+                           (valueChanged)="planChanged($event.value)"
+                           *ngIf="selectPlanesData.length>0"
+                           [disabled]="lock"></select2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngFor="let plan of configuracion.planes">
+      <div class="card-header">
+        <h4 class="fw-l">{{plan.decreto}} <span class="fw-sb panel-info pull-right">Código: {{plan.codigo}}</span></h4>
+      </div>
+      <div class="card-header" *ngIf="!lock">
+        <div class="media">
+          <div class="media-body media-middle">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label" for="form-control-2">Tipos de Enseñanza</label>
+                <div class="col-sm-8" id="form-control-2-wrapper">
+                  <select2 id="form-control-2"
+                           [data]="getSelectTipoDataByPlanId(plan.id)"
+                           [width]="520 | select2WidthFix:'form-control-2-wrapper'"
+                           [options]="selectTiposOptions"
+                           (valueChanged)="tipoChanged(plan,$event.value)"
+                           *ngIf="getSelectTipoDataByPlanId(plan.id)"
+                            [disabled]="lock"></select2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-header" *ngFor="let tipo of plan.tipos">
+        <div class="media">
+          <div class="media-heading">
+            <h5 class="fw-l">{{tipo.tipo.glosa}}<span class="fw-sb panel-info pull-right">Código: {{tipo.tipo.codigo}}</span></h5>
+          </div>
+          <div class="media-middle media-body">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-2">Cursos Minimos por Nivel</label>
+                <div class="col-sm-2">
+                  <input class="form-control" type="number" [(ngModel)]="tipo.cursos_nivel"
+                         [value]="tipo.cursos_nivel | limitCursos"
+                         (ngModelChange)="limitCursos(tipo.cursos_nivel)"
+                         (keypress)="limitCursos(tipo.cursos_nivel)"
+                         (keyup)="limitCursos(tipo.cursos_nivel)"
+                         (keydown)="limitCursos(tipo.cursos_nivel)"
+                         [readonly]="lock">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-sm-8">
+          <button class="btn btn-primary btn-block" (click)="modalOpen()" [disabled]="saveLock() || lock">Guardar</button>
+
+          <modal [animation]="true" #modal>
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">Guardar Configuración.</h4>
+            </modal-header>
+            <modal-body>
+              Presione Ok para continuar guardando la configuración.
+              <div class="media alert-warning">
+                <div class="media-middle media-body">
+                  <p class="p-a-md fw-n"><span class="icon icon-exclamation-triangle"></span> No es posible cambiar la configuración de Planes de Estudio, Tipos de Enseñanza y Cursos una vez realizada.</p>
+                </div>
+              </div>
+            </modal-body>
+            <modal-footer>
+              <button type="button" class="btn btn-primary" (click)="saveConfig()">Ok</button>
+            </modal-footer>
+          </modal>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal [animation]="true" #modalLoad>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Creando Cursos.</h4>
+  </modal-header>
+  <modal-body>
+    <div class="panel">
+      <div class="panel-body text-center">
+        <div class="spinner spinner-primary spinner-lg pos-r sq-100"></div>
+      </div>
+    </div>
+  </modal-body>
+  <!--<modal-footer>
+    <button type="button" class="btn btn-primary" (click)="modalClose()">Ok</button>
+  </modal-footer>-->
+</modal>

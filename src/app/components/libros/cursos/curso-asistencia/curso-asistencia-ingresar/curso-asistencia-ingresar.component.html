@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-spinner *ngIf="!(inasistenciaMonth.length>0)" ></app-spinner>
+    <div class="card" *ngIf="inasistenciaMonth.length>0 && calendarConfig">
+    <!--<div class="card">-->
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-offset-5 col-md-3">
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <button class="btn btn-info" (click)="decrement()"><span class="icon icon-arrow-left"></span></button>
+                <button class="btn btn-outline-info" (click)="today()"> <h4 class="card-title text-center text-capitalize">{{ getMonthName(viewDate.getMonth()) }}</h4> </button>
+                <button class="btn btn-info" (click)="increment()"><span class="icon icon-arrow-right"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <app-spinner *ngIf="!(view)"></app-spinner>
+      <div class="card-body" *ngIf="view && calendarConfig">
+      <!--<div class="card-body">-->
+        <div *ngIf="view">
+          <div *ngFor="let rowIndex of view.rowOffsets">
+            <div class="row gutter-xs">
+              <div *ngFor="let day of view.days | slice : rowIndex : rowIndex + 7">
+
+                <div *ngIf="!(day.date.getDay()==0)" class="col-md-2">
+                  <button class="btn btn-block"
+                          [ngClass]="{'btn-outline-info': day.inMonth && (getInasistenciaByDia(day.date)<=5),
+                                      'btn-outline-danger': day.inMonth && (getInasistenciaByDia(day.date)>5),
+                                      'active': day.isToday,
+                                      'text-muted': !(day.inMonth),
+                                      'hide-day': !(day.inMonth)}"
+                          [disabled]="!(day.inMonth) || day.isEspecial || day.inVacacion"
+                          (click)="modalOpen(day.date)">
+                    <div class="media">
+                      <div class="media-middle">
+                        <p>{{ getDayName(day.date.getDay()) }} <i class="text-warning">{{ getInasistenciaByDia(day.date) }}</i></p>
+                      </div>
+                      <div class="media-middle media-left">
+                        <span class="icon icon-fw icon-thumb-tack" *ngIf="day.isEspecial"></span>
+                        <span class="icon icon-fw icon-star" *ngIf="day.isFeriado"></span>
+                        <span class="icon icon-fw icon-sun-o" *ngIf="day.inVacacion"></span>
+                      </div>
+                      <div class="media-middle media-body">
+                        {{day.date.toString() | date }}
+                      </div>
+                    </div>
+
+                  </button>
+
+                  <modal [animation]="true" #modal>
+                    <modal-header [show-close]="false">
+                      <div class="media">
+                        <div class="media-middle media-left">
+                          <h4 class="modal-title fw-l">Inasistentes</h4>
+                        </div>
+                        <div class="media-middle media-body">
+                          <h4>{{selectedDay?.dia | date }}</h4>
+                        </div>
+                      </div>
+                    </modal-header>
+                    <modal-body>
+                      <app-spinner *ngIf="selectedDay.loading"></app-spinner>
+                      <div class="row gutter-sm" *ngIf="!(selectedDay.loading)">
+                        <div class="col-md-2" *ngIf="selectedDay?.alumnos">
+                          <p class="text-primary"><small>Asistentes: </small>{{ selectedDay.asistentes }}</p>
+                        </div>
+                        <div class="col-md-2">
+                          <p class="text-danger"><small>Inasistentes: </small>{{ selectedDay.inasistentes }}</p>
+                        </div>
+                        <div class="col-md-3 col-sm-offset-2">
+                          <button class="btn btn-block btn-info" (click)="toggleAll()"><span class="icon icon-fw icon-calendar-plus-o"></span>Marcar Todos</button>
+                        </div>
+                        <div class="col-md-3">
+                          <button class="btn btn-block btn-default" (click)="unToggleAll()"><span class="icon icon-fw icon-calendar-minus-o"></span>Desmarcar Todos</button>
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="!(selectedDay.loading)">
+                        <div class="col-md-12">
+                          <div class="table-responsive" *ngIf="selectedDay.alumnos">
+                            <table class="table table-bordered table-hover">
+                              <thead>
+                              <tr class="bg-info">
+                                <th>N°</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Rut</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let alumno of selectedDay.alumnos"
+                                  [ngClass]="{'bg-danger':!(alumno.asistencia),'bg-default':alumno.desiste}"
+                                  (click)="toggleValue(alumno)">
+                                <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.lista}}</td>
+                                <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.nombre}}</td>
+                                <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.apellido_paterno}} {{alumno.apellido_materno}}</td>
+                                <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.rut}}-{{alumno.dv}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </modal-body>
+                    <modal-footer>
+                      <button type="button" class="btn" (click)="modalDismiss()">Cerrar</button>
+                      <button type="button" class="btn btn-primary" (click)="saveAsistencia()">Guardar</button>
+                    </modal-footer>
+                  </modal>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

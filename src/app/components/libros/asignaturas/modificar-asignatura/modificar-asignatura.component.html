@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="card" *ngIf="asignatura && planesDeEstudio && planesDeEstudio.length>0">
+      <div class="card-header">
+        <div class="media">
+          <div class="media-heading">
+            <p>Nombre <strong>{{asignatura.nombre}}</strong></p>
+          </div>
+          <div class="media-body media-middle">
+            <p>Plan de Estudios <strong>{{getPlanEstudiosByPlanId(asignatura.plan_id)}}</strong></p>
+            <p>Detalles <span *ngIf="asignatura.formacion" class="label label-outline-info label-pill">{{asignatura.formacion}}</span><span class="label label-outline-info label-pill" *ngIf="asignatura.obligatoria">Obligatoria</span><span class="label label-outline-info label-pill" *ngIf="asignatura.especial">Especial</span><span class="label label-outline-info label-pill" *ngIf="asignatura.electivo">Electivo</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <div class="control-label col-sm-2">Evaluación Especial</div>
+            <div class="col-md-1">
+              <label class="switch switch-info">
+                <input class="switch-input" type="checkbox" [(ngModel)]="especial">
+                <span class="switch-track"></span>
+                <span class="switch-thumb"></span>
+              </label>
+            </div>
+            <div class="col-sm-8" *ngIf="especial">
+              <select class="form-control" [(ngModel)]="asignatura.eval">
+                <option [value]="null" disabled selected>Seleccionar Escala</option>
+                <option *ngFor="let escala of selectEscalas" [value]="escala.id">{{escala.glosa}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer" *ngIf="asignatura.eval && especial">
+        <div class="card-header" *ngIf="checkEscala('1')">
+          <div class="media">
+            <div class="media-heading">
+              <h4 class="card-title fw-l">Escala Numérica 0 a 100</h4>
+            </div>
+            <div class="media-body">
+              <div class="media-middle">
+                <p><strong>Nota Mínima:</strong> 0 (Equivalente a 1.0)</p>
+                <p><strong>Nota 60%:</strong> 60 (Equivalente a 4.0)</p>
+                <p><strong>Nota Máxima:</strong> 100 (Equivalente a 7.0)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header" *ngIf="checkEscala('2')" >
+          <div class="media">
+            <div class="media-heading">
+              <h4 class="card-title fw-l">Escala Oficial Educación Parvularia</h4>
+            </div>
+            <div class="media-body">
+              <div class="media-middle">
+                <p>Sin Evidencias <strong>SE</strong></p>
+                <p>No Logrado <strong>NL</strong></p>
+                <p>Logrado Con Dificultad <strong>LCD</strong></p>
+                <p>Logrado Adecuado a lo Esperado <strong>LAE</strong></p>
+                <p>Logrado Sobre lo Esperado <strong>LSE</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header" *ngIf="checkEscala('3')">
+          <div class="media">
+            <div class="media-heading">
+              <h4 class="card-title fw-l">Escala Modificada Educación Parvularia</h4>
+            </div>
+            <div class="media-body">
+              <div class="media-middle">
+                <p>No Logrado <strong>NL</strong></p>
+                <p>Por Lograr <strong>PL</strong></p>
+                <p>Medianamente Logrado <strong>ML</strong></p>
+                <p>Logrado <strong>L</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-header" *ngIf="checkEscala('4')" >
+          <div class="media">
+            <div class="media-heading">
+              <h4 class="card-title fw-l">Escala Especial</h4>
+            </div>
+            <div class="media-body">
+              <div class="media-middle">
+                <p>Insuficiente <strong>I</strong> (equivalente a 1.0-3.9)</p>
+                <p>Suficiente <strong>S</strong> (equivalente a 4.0-4.9)</p>
+                <p>Bueno <strong>B</strong> (equivalente a 5.0-5.9)</p>
+                <p>Muy Bueno <strong>MB</strong> (equivalente a 6.0-7.0)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-3">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-sm-9">
+          <button class="btn btn-primary btn-block" (click)="saveAsignatura()">Guardar</button>
+
+          <modal [animation]="true" #modal>
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">Asignatura modificada con éxito.</h4>
+            </modal-header>
+            <modal-body>
+              Presione Ok para continuar.
+            </modal-body>
+            <modal-footer>
+              <button type="button" class="btn btn-primary" (click)="modalClose()">Ok</button>
+            </modal-footer>
+          </modal>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-10 col-sm-offset-1">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="form">
+          <div class="demo-form-wrapper">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="select-form-1">Tipo de Enseñanza</label>
+              <div class="col-sm-6" id="select-form-1-wrapper">
+                <select2 id="select-form-1"
+                         [data]="selectData"
+                         [width]="350 | select2WidthFix:'select-form-1-wrapper'"
+                         [options]="selectOptions"
+                         [disabled]="disabledSelect"
+                         [value]="selectValue"
+                         (valueChanged)="selectChanged($event)"></select2>
+              </div>
+              <div class="col-sm-3 col-sm-offset-1">
+                <button class="btn btn-block btn-outline-primary"
+                        (click)="selectAll()"
+                        [ngClass]="{'active': disabledSelect}">Seleccionar Todos</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

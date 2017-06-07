@@ -1,0 +1,480 @@
+<div class="title-bar">
+  <h1 class="title-bar title">Ver Postulación</h1>
+  <p class="title bar description"></p>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <app-spinner [timeoutMessage]="timeoutMessage" *ngIf="!(postulante)"></app-spinner>
+    <div class="card" *ngIf="postulante">
+      <div class="card-header">
+        <h3 class="card-title fw-l">
+          Postulante
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="demo-form-wrapper">
+          <div class="form form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-1">Nombre</label>
+              <div class="col-sm-3">
+                <input class="form-control" type="text" id="form-control-1" [(ngModel)]="postulante.nombre" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-2">Apellido Paterno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-2" [(ngModel)]="postulante.apellido_paterno" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-3">Apellido Materno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-3" [(ngModel)]="postulante.apellido_materno" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-4">Sexo</label>
+              <div class="col-sm-1">
+                <input class="form-control no-arrows" type="text" id="form-control-4" [(ngModel)]="postulante.sexo" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-5">Fecha de Nacimiento</label>
+              <div class="col-sm-3">
+                <div class="input-with-icon">
+                  <input class="form-control" id="form-control-5" type="text" [(ngModel)]="postulante.fecha_nacimiento" readonly>
+                  <span class="icon icon-calendar input-icon"></span>
+                </div>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-6">Rut</label>
+              <div class="col-sm-2">
+                <input class="form-control no-arrows" type="number" id="form-control-6" [(ngModel)]="postulante.rut" readonly>
+              </div>
+              <div class="col-sm-1">
+                <input class="form-control" type="text" id="form-control-7" [(ngModel)]="postulante.dv" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-8">Nacionalidad</label>
+              <div class="col-sm-3">
+                <input id="form-control-8" class="form-control" readonly [(ngModel)]="postulante.nacionalidad">
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-9">Etnia</label>
+              <div class="col-sm-2">
+                <input id="form-control-9" class="form-control" [(ngModel)]="postulante.etnia" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-10">Pasaporte</label>
+              <div class="col-sm-2">
+                <input id="form-control-10" class="form-control" type="text" [(ngModel)]="postulante.pasaporte" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-11">Teléfono Fijo</label>
+              <div class="col-sm-2">
+                <input id="form-control-11" class="form-control" type="text" [(ngModel)]="postulante.fono_casa" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-12">Teléfono Móvil</label>
+              <div class="col-sm-2">
+                <input id="form-control-12" class="form-control" type="text" [(ngModel)]="postulante.fono_movil" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-13">Email</label>
+              <div class="col-sm-4">
+                <input id="form-control-13" class="form-control" type="text" [(ngModel)]="postulante.email" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-1 col-md-offset-1"> SEP </label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="postulante.sep" disabled="disabled">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="control-label col-md-1"> PIE </label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="postulante.pie" disabled="disabled">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="control-label col-md-1"> Pro Retención </label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="postulante.proretencion" disabled="disabled">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="control-label col-md-2"> Intercambio </label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="postulante.intercambio" disabled="disabled">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="control-label col-md-1"> Internado </label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="postulante.internado" disabled="disabled">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="postulante && postulante.sep">
+              <label class="control-label col-md-1 col-md-offset-1"> Prioritario </label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="postulante.prioritario" disabled="disabled">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+
+              <label class="control-label col-md-1"> Preferente </label>
+              <div class="col-md-1">
+                <label class="switch switch-info">
+                  <input class="switch-input" type="checkbox" [(ngModel)]="postulante.preferente" disabled="disabled">
+                  <span class="switch-track"></span>
+                  <span class="switch-thumb"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="grados.length>0">
+      <div class="card-body">
+        <div class="demo-form-wrapper">
+          <div class="form form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="form-control-130">Nivel a Postular</label>
+              <div class="col-sm-5">
+                <select class="form-control no-arrows" type="text" id="form-control-130" [(ngModel)]="postulante.grado" disabled>
+                  <option *ngFor="let grado of grados" [value]="grado">{{grado}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="card" *ngIf="padre">
+      <div class="card-header">
+        <div class="media">
+          <div class="media-middle media-body">
+            <h3 class="card-title fw-l">Padre</h3>
+          </div>
+          <div class="media-middle media-right">
+            <p class="fw-l">
+              Apoderado
+              <label class="custom-control custom-control-primary custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="{{padre.apoderado}}" [(ngModel)]="padre.apoderado" disabled="disabled">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="demo-form-wrapper">
+          <div class="form form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-14">Nombre</label>
+              <div class="col-sm-3">
+                <input class="form-control" type="text" id="form-control-14" [(ngModel)]="padre.usuario.nombre" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-15">Apellido Paterno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-15" [(ngModel)]="padre.usuario.apellido_paterno" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-16">Apellido Materno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-16" [(ngModel)]="padre.usuario.apellido_materno" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-17">Sexo</label>
+              <div class="col-sm-1">
+                <input class="form-control no-arrows" type="text" id="form-control-17" [(ngModel)]="padre.usuario.sexo" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-18">Fecha de Nacimiento</label>
+              <div class="col-sm-3">
+                <div class="input-with-icon">
+                  <input class="form-control" id="form-control-18" type="text" [(ngModel)]="padre.usuario.fecha_nacimiento" readonly>
+                  <span class="icon icon-calendar input-icon"></span>
+                </div>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-19">Rut</label>
+              <div class="col-sm-2">
+                <input class="form-control no-arrows" type="number" id="form-control-19" [(ngModel)]="padre.usuario.rut" readonly>
+              </div>
+              <div class="col-sm-1">
+                <input class="form-control" type="text" id="form-control-20" [(ngModel)]="padre.usuario.dv" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-21">Teléfono Fijo</label>
+              <div class="col-sm-2">
+                <input id="form-control-21" class="form-control" type="text" [(ngModel)]="padre.usuario.fono_casa" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-22">Teléfono Móvil</label>
+              <div class="col-sm-2">
+                <input id="form-control-22" class="form-control" type="text" [(ngModel)]="padre.usuario.fono_movil" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-23">Email</label>
+              <div class="col-sm-4">
+                <input id="form-control-23" class="form-control" type="text" [(ngModel)]="padre.usuario.mail" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-24">Nacionalidad</label>
+              <div class="col-sm-5">
+                <input id="form-control-24" class="form-control" [(ngModel)]="padre.usuario.nacionalidad" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-25">Estado Civil</label>
+              <div class="col-sm-3">
+                <input id="form-control-25" class="form-control" type="text" [(ngModel)]="padre.usuario.estado_civil" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-26">Titulo</label>
+              <div class="col-sm-4">
+                <input id="form-control-26" class="form-control" type="text" [(ngModel)]="padre.titulo" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-27">Ocupación</label>
+              <div class="col-sm-4">
+                <input id="form-control-27" class="form-control" type="text" [(ngModel)]="padre.ocupacion" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="card" *ngIf="madre">
+      <div class="card-header">
+        <div class="media">
+          <div class="media-middle media-body">
+            <h3 class="card-title fw-l">Madre</h3>
+          </div>
+          <div class="media-middle media-right">
+            <p class="fw-l">
+              Apoderado
+              <label class="custom-control custom-control-primary custom-checkbox">
+                <input class="custom-control-input" type="checkbox" value="{{madre.apoderado}}" [(ngModel)]="madre.apoderado" disabled="disabled">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="demo-form-wrapper">
+          <div class="form form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-28">Nombre</label>
+              <div class="col-sm-3">
+                <input class="form-control" type="text" id="form-control-28" [(ngModel)]="madre.usuario.nombre" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-29">Apellido Paterno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-29" [(ngModel)]="madre.usuario.apellido_paterno" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-30">Apellido Materno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-30" [(ngModel)]="madre.usuario.apellido_materno" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-31">Sexo</label>
+              <div class="col-sm-1">
+                <input class="form-control no-arrows" type="text" id="form-control-31" [(ngModel)]="madre.usuario.sexo" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-32">Fecha de Nacimiento</label>
+              <div class="col-sm-3">
+                <div class="input-with-icon">
+                  <input class="form-control" id="form-control-32" type="text" [(ngModel)]="madre.usuario.fecha_nacimiento" readonly>
+                  <span class="icon icon-calendar input-icon"></span>
+                </div>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-33">Rut</label>
+              <div class="col-sm-2">
+                <input class="form-control no-arrows" type="number" id="form-control-33" [(ngModel)]="madre.usuario.rut" readonly>
+              </div>
+              <div class="col-sm-1">
+                <input class="form-control" type="text" id="form-control-34" [(ngModel)]="madre.usuario.dv" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-34">Teléfono Fijo</label>
+              <div class="col-sm-2">
+                <input id="form-control-35" class="form-control" type="text" [(ngModel)]="madre.usuario.fono_casa" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-36">Teléfono Móvil</label>
+              <div class="col-sm-2">
+                <input id="form-control-36" class="form-control" type="text" [(ngModel)]="madre.usuario.fono_movil" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-37">Email</label>
+              <div class="col-sm-4">
+                <input id="form-control-37" class="form-control" type="text" [(ngModel)]="madre.usuario.mail" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-38">Nacionalidad</label>
+              <div class="col-sm-5">
+                <input id="form-control-38" class="form-control" [(ngModel)]="madre.usuario.nacionalidad" readonly>
+
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-39">Estado Civil</label>
+              <div class="col-sm-3">
+                <input id="form-control-39" class="form-control" type="text" [(ngModel)]="madre.usuario.estado_civil" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-40">Titulo</label>
+              <div class="col-sm-4">
+                <input id="form-control-40" class="form-control" type="text" [(ngModel)]="madre.titulo" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-41">Ocupación</label>
+              <div class="col-sm-4">
+                <input id="form-control-41" class="form-control" type="text" [(ngModel)]="madre.ocupacion" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="padre && madre && apoderado">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="card" *ngIf="!padre.apoderado && !madre.apoderado">
+      <div class="card-header">
+        <div class="media">
+          <div class="media-middle media-body">
+            <h3 class="card-title fw-l">Apoderado</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="demo-form-wrapper">
+          <div class="form form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-42">Nombre</label>
+              <div class="col-sm-3">
+                <input class="form-control" type="text" id="form-control-42" [(ngModel)]="apoderado.usuario.nombre" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-43">Apellido Paterno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-43" [(ngModel)]="apoderado.usuario.apellido_paterno" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-44">Apellido Materno</label>
+              <div class="col-sm-2">
+                <input class="form-control" type="text" id="form-control-44" [(ngModel)]="apoderado.usuario.apellido_materno" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-45">Sexo</label>
+              <div class="col-sm-1">
+                <input class="form-control no-arrows" type="text" id="form-control-45" [(ngModel)]="apoderado.usuario.sexo" readonly>
+
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-46">Fecha de Nacimiento</label>
+              <div class="col-sm-3">
+                <div class="input-with-icon">
+                  <input class="form-control" id="form-control-46" type="text" [(ngModel)]="apoderado.usuario.fecha_nacimiento" readonly>
+                  <span class="icon icon-calendar input-icon"></span>
+                </div>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-47">Rut</label>
+              <div class="col-sm-2">
+                <input class="form-control no-arrows" type="number" id="form-control-47" [(ngModel)]="apoderado.usuario.rut" readonly>
+              </div>
+              <div class="col-sm-1">
+                <input class="form-control" type="text" id="form-control-48" [(ngModel)]="apoderado.usuario.dv" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-1 col-sm-offset-1 control-label" for="form-control-49">Teléfono Fijo</label>
+              <div class="col-sm-2">
+                <input id="form-control-49" class="form-control" type="text" [(ngModel)]="apoderado.usuario.fono_casa" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-51">Teléfono Móvil</label>
+              <div class="col-sm-2">
+                <input id="form-control-51" class="form-control" type="text" [(ngModel)]="apoderado.usuario.fono_movil" readonly>
+              </div>
+              <label class="col-sm-1 control-label" for="form-control-52">Email</label>
+              <div class="col-sm-4">
+                <input id="form-control-52" class="form-control" type="text" [(ngModel)]="apoderado.usuario.mail" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-53">Nacionalidad</label>
+              <div class="col-sm-5">
+                <input id="form-control-53" class="form-control" [(ngModel)]="apoderado.usuario.nacionalidad" readonly>
+
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-54">Estado Civil</label>
+              <div class="col-sm-3">
+                <input id="form-control-54" class="form-control" type="text" [(ngModel)]="apoderado.usuario.estado_civil" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-55">Titulo</label>
+              <div class="col-sm-4">
+                <input id="form-control-55" class="form-control" type="text" [(ngModel)]="apoderado.titulo" readonly>
+              </div>
+              <label class="col-sm-2 control-label" for="form-control-56">Ocupación</label>
+              <div class="col-sm-4">
+                <input id="form-control-56" class="form-control" type="text" [(ngModel)]="apoderado.ocupacion" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-sm-8">
+          <button class="btn btn-primary btn-block" (click)="goToEdit()" [disabled]="!(postulante)">Editar</button>
+
+          <modal [animation]="true" #modal>
+            <modal-header [show-close]="true">
+              <h4 class="modal-title">Matricula creada con éxito.</h4>
+            </modal-header>
+            <modal-body>
+              Presione Ok para continuar.
+            </modal-body>
+            <modal-footer>
+              <button type="button" class="btn btn-primary" (click)="modalClose()">Ok</button>
+            </modal-footer>
+          </modal>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

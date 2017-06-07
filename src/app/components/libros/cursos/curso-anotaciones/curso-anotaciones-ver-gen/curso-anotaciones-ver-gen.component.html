@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-spinner *ngIf="!(anotaciones.length>0)"></app-spinner>
+    <div class="panel" *ngIf="anotaciones.length>0">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+            <tr class="bg-info">
+              <th>Fecha</th>
+              <th>Anotador</th>
+              <th>Asignatura</th>
+              <th>Caract.</th>
+              <th>Observacion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let anotacion of anotaciones" (click)="toggleShow(anotacion)">
+              <td>{{anotacion?.fecha_anotacion.toLocaleString() | date }}</td>
+              <td>{{anotacion?.profesor?.nombre}} {{anotacion?.profesor?.apellido_paterno}}</td>
+              <td>{{anotacion?.asignatura?.nombre}}</td>
+              <td>
+                <span class="label label-info label-pill" *ngIf="anotacion.general">General</span>
+                <span class="label label-danger label-pill" *ngIf="!(anotacion.tipo)">Negativa</span>
+                <span class="label label-success label-pill" *ngIf="anotacion.tipo">Positiva</span>
+                <span class="label label-warning label-pill" *ngIf="anotacion.seguimiento">Seguimiento</span>
+              </td>
+              <td>
+                <div>
+                  <p class="card-text">{{ anotacion.observacion | truncate: 60 }}</p>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<modal [animation]="true" #modal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Anotacion</h4>
+    <h5>{{ selectedAnotacion.fecha_anotacion | date }}</h5>
+    <h6 *ngIf="selectedAnotacion.funcionario_id">Anotador: {{selectedAnotacion.profesor.nombre}} {{selectedAnotacion.profesor.apellido_paterno}} {{selectedAnotacion.profesor.apellido_materno}} </h6>
+    <h6 *ngIf="selectedAnotacion.asignatura_id">Asignatura: {{selectedAnotacion.asignatura.nombre}}</h6>
+  </modal-header>
+  <modal-body>
+    <p class="card-text">{{ selectedAnotacion.observacion }}</p>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="modalClose()">Continuar</button>
+  </modal-footer>
+</modal>

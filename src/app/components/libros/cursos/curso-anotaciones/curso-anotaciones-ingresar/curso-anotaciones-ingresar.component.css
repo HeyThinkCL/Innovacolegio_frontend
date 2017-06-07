@@ -1,0 +1,10 @@
+.switch-danger-special .switch-input ~ .switch-track {
+  background-color: #d50000;
+}
+.switch-danger-special .switch-input ~ .switch-thumb {
+  border-color: #d50000;
+}
+
+.desiste{
+  text-decoration: line-through;
+}

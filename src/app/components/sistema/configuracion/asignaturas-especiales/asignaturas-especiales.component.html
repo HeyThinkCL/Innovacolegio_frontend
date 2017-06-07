@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="col-sm-11 col-sm-offset-1">
+    <div class="title-bar">
+      <h2 class="title-bar-title"><span class="icon icon-fw icon-pencil"></span> Asignaturas Especiales</h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <app-spinner [timeoutMessage]="" *ngIf="!(configuracion)"></app-spinner>
+    <div class="card" *ngIf="configuracion">
+      <div class="card-header">
+        <h3 class="card-title fw-l">Creación de Asignaturas Especiales</h3>
+      </div>
+      <div class="card-body">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="form-control-1">Nombre de Asignatura</label>
+            <div class="col-sm-8">
+              <input class="form-control" id="form-control-1" type="text" [(ngModel)]="configuracion.asignatura.nombre">
+            </div>
+            <div class="col-sm-2">
+              <div class="btn-group-sm">
+                <button class="btn btn-outline-primary" (click)="saveAsignatura()" [disabled]="configuracion.planes_estudio.length<1"><span class="btn-icon icon icon-fw icon-lg icon-plus"></span></button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="form-control-2">Plan de Estudio</label>
+            <div class="col-sm-8"  id="form-control-2-wrapper">
+              <select2 id="form-control-2"
+                       [data]="selectPlanesData"
+                       [width]="520 | select2WidthFix:'form-control-2-wrapper'"
+                       [options]="selectPlanesOptions"
+                       (valueChanged)="planChanged($event.value)"
+                       [value]="this.configuracion.planes_estudio"
+                       *ngIf="selectPlanesData.length>0"></select2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title fw-l">Asignaturas Especiales Existentes</h3>
+      </div>
+      <div *ngFor="let asignatura of allAsignaturas" class="card-header">
+        <div class="media">
+          <div class="media-heading">
+            <h5 class="fw-l">{{asignatura.nombre}}<span class="fw-sb panel-info pull-right">{{asignatura.codigo}}</span></h5>
+          </div>
+        </div>
+        <div class="media-middle media-body">
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-control-2">Plan de Estudio</label>
+              <div class="col-sm-8"  id="form-control-3-wrapper">
+                <select2 id="form-control-3"
+                         [data]="selectPlanesData"
+                         [width]="520 | select2WidthFix:'form-control-3-wrapper'"
+                         [options]="selectPlanesOptions"
+                         [value]="asignatura.planes_id"
+                         *ngIf="selectPlanesData.length>0 && asignatura.planes_id.length>0" [disabled]="true"></select2>
+              </div>
+              <div class="col-sm-2">
+                <div class="btn-group-sm">
+                  <button class="btn btn-outline-danger" (click)="deleteAsignatura(asignatura)"><span class="btn-icon icon icon-fw icon-lg icon-minus"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="media">
+          <div class="media-heading">
+            <h5 class="fw-l">{{tipo.tipo.glosa}}<span class="fw-sb panel-info pull-right">Código: {{tipo.tipo.codigo}}</span></h5>
+          </div>
+          <div class="media-middle media-body">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-2">Cursos Minimos por Nivel</label>
+                <div class="col-sm-2">
+                  <input class="form-control" type="number" [(ngModel)]="tipo.cursos_nivel" [readonly]="lock">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+    <div class="form form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-12">
+          <button class="btn btn-default btn-block" (click)="goBack()">Volver</button>
+        </div>
+      <!--<div class="col-sm-8">
+        <button class="btn btn-primary btn-block" (click)="modalOpen()">Guardar</button>
+
+        <modal [animation]="true" #modal>
+          <modal-header [show-close]="true">
+            <h4 class="modal-title">Guardar Asignatura.</h4>
+          </modal-header>
+          <modal-body>
+            Presione Ok para continuar guardando la asignatura.
+          </modal-body>
+          <modal-footer>
+            <button type="button" class="btn btn-primary" (click)="saveAsignatura()">Ok</button>
+          </modal-footer>
+        </modal>
+
+      </div>-->
+      </div>
+    </div>
+  </div>
+</div>

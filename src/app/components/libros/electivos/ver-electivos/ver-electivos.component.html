@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="demo-form-wrapper">
+      <div class="form form-horizontal">
+        <div class="form-group form-group-lg">
+          <div class="form-group form-group-lg">
+            <div class="col-md-5 col-sm-offset-2">
+              <div class="input-with-icon">
+                <input class="form-control input-sm" type="text" placeholder="Buscar&hellip;" [(ngModel)]="filterData">
+                <span class="icon icon-search input-icon"></span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <a class="btn btn-lg btn-primary btn-block" [routerLink]="['../crear']">Crear Ramo Electivo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <!--<app-spinner [timeoutMessage]="timeoutMessage" *ngIf="!(asignaturas.length>0)"></app-spinner>-->
+    <div class="panel" *ngIf="electivos.length>0">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-middle table-hover">
+            <thead>
+            <tr class="bg-primary">
+              <th>Nombre</th>
+              <th>Plan de Estudios</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let electivo of electivos | filterArray:filterData:filterKeys" (click)="goToElectivo(electivo.id)">
+              <td>
+                {{electivo.nombre}}
+              </td>
+              <td>
+                {{getPlanEstudiosByPlanId(electivo.plan_id)}}
+              </td>
+              <td>
+                <div class="btn-toolbar pull-right">
+                  <div class="btn-group btn-group-sm">
+                    <a class="btn btn-primary btn-sm" [routerLink]="['../editar',electivo.id]">
+                      <span class="icon icon-edit icon-fw"></span>
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
