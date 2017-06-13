@@ -12,7 +12,7 @@ export class VerFuncionariosComponent implements OnInit {
   @ViewChild('modal')
   modal: ModalComponent;
 
-  private funcionarios = [];
+  public funcionarios = [];
   selectedFuncionario_id: number;
   filterData:string  = '';
   filterKeys = [

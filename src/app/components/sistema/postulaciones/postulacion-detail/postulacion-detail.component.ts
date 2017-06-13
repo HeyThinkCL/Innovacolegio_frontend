@@ -17,14 +17,14 @@ import { CursosService } from '../../../../services/libros/cursos.service';
 export class PostulacionDetailComponent implements OnInit {
 
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private postulante: any;
-  private padre: any;
-  private madre: any;
-  private apoderado: any;
+  public postulante: any;
+  public padre: any;
+  public madre: any;
+  public apoderado: any;
 
-  private grados = [];
+  public grados = [];
 
   timeoutMessage: string;
 

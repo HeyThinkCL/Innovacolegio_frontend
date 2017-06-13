@@ -39,7 +39,7 @@ export class EditarMatriculaComponent implements OnInit {
 
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   //etnias select2
   public selectEtniaData: Array<Select2OptionData> = [];
@@ -58,15 +58,15 @@ export class EditarMatriculaComponent implements OnInit {
 
   curso: any;
 
-  private matricula:any;
-  private padre:any;
-  private madre:any;
-  private apoderado:any;
+  public matricula:any;
+  public padre:any;
+  public madre:any;
+  public apoderado:any;
 
-  private selectedMatricula:any;
-  private selectedPadre:any;
-  private selectedMadre:any;
-  private selectedApoderado:any;
+  public selectedMatricula:any;
+  public selectedPadre:any;
+  public selectedMadre:any;
+  public selectedApoderado:any;
 
   constructor(
     private route: ActivatedRoute,

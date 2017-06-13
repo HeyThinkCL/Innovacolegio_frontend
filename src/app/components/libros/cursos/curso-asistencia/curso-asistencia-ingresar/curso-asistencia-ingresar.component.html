@@ -32,7 +32,7 @@
                                       'active': day.isToday,
                                       'text-muted': !(day.inMonth),
                                       'hide-day': !(day.inMonth)}"
-                          [disabled]="!(day.inMonth) || day.isEspecial || day.inVacacion"
+                          [disabled]="!(day.inMonth) || day.isEspecial || day.inVacacion || !(day.inPeriodoAcademico)"
                           (click)="modalOpen(day.date)">
                     <div class="media">
                       <div class="media-middle">

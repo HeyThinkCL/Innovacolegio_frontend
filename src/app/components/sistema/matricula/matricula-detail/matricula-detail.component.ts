@@ -21,15 +21,15 @@ export class MatriculaDetailComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private alumno: any;
-  private padre: any;
-  private madre: any;
-  private apoderado: any;
+  public alumno: any;
+  public padre: any;
+  public madre: any;
+  public apoderado: any;
 
   timeoutMessage: string;
-  private curso: any;
+  public curso: any;
 
   constructor(
     private route: ActivatedRoute,

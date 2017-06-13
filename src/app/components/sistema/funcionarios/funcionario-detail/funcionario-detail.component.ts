@@ -16,13 +16,13 @@ import {FuncionariosService} from '../../../../services/sistema/funcionarios.ser
 export class FuncionarioDetailComponent implements OnInit {
 
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private funcionario: any;
+  public funcionario: any;
 
-  private rolesDocentes = [];
+  public rolesDocentes = [];
   rolesDocentesCheck: boolean = false;
-  private rolesNoDocentes = [];
+  public rolesNoDocentes = [];
   rolesNoDocentesCheck: boolean = false;
 
   public selectRolesDocentesData: Array<Select2OptionData> = [];

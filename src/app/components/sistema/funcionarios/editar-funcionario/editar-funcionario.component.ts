@@ -22,7 +22,7 @@ export class EditarFuncionarioComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   //nacionalidades select2
   public selectNacionalidadData: Array<Select2OptionData> = [];
@@ -36,12 +36,12 @@ export class EditarFuncionarioComponent implements OnInit {
   public selectRolesNoDocentesData: Array<Select2OptionData> = [];
   public selectRolesOptions: Select2Options;
 
-  private selectedFuncionario: any;
-  private funcionario: any;
+  public selectedFuncionario: any;
+  public funcionario: any;
 
-  private rolesDocentes = [];
+  public rolesDocentes = [];
   rolesDocentesCheck: boolean = false;
-  private rolesNoDocentes = [];
+  public rolesNoDocentes = [];
   rolesNoDocentesCheck: boolean = false;
 
   constructor(

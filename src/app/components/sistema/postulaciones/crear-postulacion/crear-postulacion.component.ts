@@ -48,12 +48,12 @@ export class CrearPostulacionComponent implements OnInit {
   public selectEstadoCivilData: Array<Select2OptionData> = [];
   public selectEstadoCivilOptions: Select2Options;
 
-  private grados = [];
+  public grados = [];
 
-  private postulante: Postulante;
-  private padre: Apoderado;
-  private madre: Apoderado;
-  private apoderado: Apoderado;
+  public postulante: Postulante;
+  public padre: Apoderado;
+  public madre: Apoderado;
+  public apoderado: Apoderado;
 
   constructor(
     private location: Location,

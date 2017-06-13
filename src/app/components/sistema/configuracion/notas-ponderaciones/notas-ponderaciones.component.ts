@@ -28,8 +28,8 @@ import { ConfiguracionService } from '../../../../services/sistema/configuracion
 export class NotasPonderacionesComponent implements OnInit {
   @ViewChild('modal') modal: ModalComponent;
 
-  private configId;
-  private configuracion = {
+  public configId;
+  public configuracion = {
     'notas':{
       'decimales':null,
       'aprox':null,

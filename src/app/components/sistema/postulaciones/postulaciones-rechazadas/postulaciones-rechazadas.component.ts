@@ -17,7 +17,7 @@ export class PostulacionesRechazadasComponent implements OnInit {
   @Output() onSelect = new EventEmitter<any>();
   @ViewChild('deleteModal') deleteModal: ModalComponent;
 
-  private postulaciones = [];
+  public postulaciones = [];
   postulacionToDelete_id: number;
   selected = [];
 

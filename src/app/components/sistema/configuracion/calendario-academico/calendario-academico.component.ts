@@ -66,12 +66,18 @@ export class CalendarioAcademicoComponent implements OnInit {
         if(res){
           this.calendarioService.getConfigCalendarioAcademicoById(this.configId).subscribe(subRes => {
             this.configuracion = subRes;
+            if(this.configuracion.periodo_academico.length == 3){
+              this.trimestre = true;
+            }
             this.formatDates(this.configuracion);
           })
         } else {
           this.calendarioService.createConfigCalendarioAcademico(this.configId).subscribe(subRes => {
             this.calendarioService.getConfigCalendarioAcademicoById(this.configId).subscribe(subSubRes => {
               this.configuracion = subSubRes;
+              if(this.configuracion.periodo_academico.length == 3){
+                this.trimestre = true;
+              }
               this.formatDates(this.configuracion);
             })
           })
@@ -86,16 +92,18 @@ export class CalendarioAcademicoComponent implements OnInit {
   }
 
   formatDates(config: any){
-    for(let key in config.periodo_academico){
-      if(key.toString().includes('fecha') && !(typeof config.periodo_academico[key.toString()] === 'boolean') ){
-        if(config.periodo_academico[key.toString()]){
-          let _b1 = config.periodo_academico[key.toString()].toString().split('T');
-          let _b2 = _b1[0].split('-').reverse();
-          config.periodo_academico[key.toString()] = _b2.join('-');
-
+    for (let periodo of config.periodo_academico){
+      for(let key in periodo){
+        if(key.toString().includes('fecha') && !(typeof config.periodo_academico[key.toString()] === 'boolean') ){
+          if(periodo[key.toString()]){
+            let _b1 = periodo[key.toString()].toString().split('T');
+            let _b2 = _b1[0].split('-').reverse();
+            periodo[key.toString()] = _b2.join('-');
+          }
         }
       }
     }
+
     for (let periodo of config.vacaciones){
       for(let key in periodo){
         if(key.toString().includes('fecha') && !(typeof config.periodo_academico[key.toString()] === 'boolean') ){
@@ -184,14 +192,16 @@ export class CalendarioAcademicoComponent implements OnInit {
       });
 
     } else if(!this.trimestre && this.configuracion.periodo_academico.length>2){
-      this.configuracion.periodo_academico.splice(2,1);
-      for(let p in this.configuracion.periodo_academico){
-        if(+p == 0){
-          this.configuracion.periodo_academico[p].glosa = "Primer Semestre";
-        } else {
-          this.configuracion.periodo_academico[p].glosa = "Segundo Semestre";
+      this.calendarioService.deleteEventCalendarioAcademico(this.configuracion.periodo_academico[2].id).subscribe(res => {
+        this.configuracion.periodo_academico.splice(2,1);
+        for(let p in this.configuracion.periodo_academico){
+          if(+p == 0){
+            this.configuracion.periodo_academico[p].glosa = "Primer Semestre";
+          } else {
+            this.configuracion.periodo_academico[p].glosa = "Segundo Semestre";
+          }
         }
-      }
+      });
     }
   }
 

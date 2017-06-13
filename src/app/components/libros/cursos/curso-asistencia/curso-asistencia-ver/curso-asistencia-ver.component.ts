@@ -75,7 +75,7 @@ export class CursoAsistenciaVerComponent implements OnInit {
         this.configuracionService.getConfiguraciones().subscribe(configs => {
           let config = configs.find(c => c.glosa == 'Calendario Académico' && c.colegio_id == +JSON.parse(localStorage.getItem('currentUser')).colegioId);
           this.calendarioService.getConfigCalendarioAcademicoById(config.id).subscribe(subRes => {
-            if(subRes && subRes.periodo_academico && (subRes.periodo_academico.fecha_inicio && subRes.periodo_academico.fecha_termino)){
+            if(subRes && subRes.periodo_academico && (subRes.periodo_academico.length>1)){
 
               this.calendarConfig = subRes;
               this.view = this.getMonthView({
@@ -131,9 +131,16 @@ export class CursoAsistenciaVerComponent implements OnInit {
 
   //date data
   inPeriodoAcademico(day: Date){
-    let start = this.calendarConfig.periodo_academico.fecha_inicio;
-    let end = this.calendarConfig.periodo_academico.fecha_termino;
-    return ((isAfter(day,start) && isBefore(day,end)) || isSameDay(day,start) || isSameDay(day,end))
+    let start: any;
+    let end: any;
+    for(let periodo of this.calendarConfig.periodo_academico){
+      start = periodo.fecha_inicio;
+      end = periodo.fecha_termino;
+      if((isAfter(day,start) && isBefore(day,end)) || isSameDay(day,start) || isSameDay(day,end)){
+        return true;
+      }
+    }
+    return false;
   }
 
   inVacacion(day: Date){

@@ -17,12 +17,12 @@ export class PostulacionesDashboardComponent implements OnInit {
   selectedTable = '';
   subjects = [];
 
-  private confirmModalMode = {
+  public confirmModalMode = {
     mode: null,
     title: '',
     body: '',
   };
-  private notifyModalTitle:string;
+  public notifyModalTitle:string;
 
   constructor(
     private postulacionesService: PostulacionesService,

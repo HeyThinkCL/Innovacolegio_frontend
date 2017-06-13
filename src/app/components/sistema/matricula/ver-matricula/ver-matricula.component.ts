@@ -19,8 +19,8 @@ export class VerMatriculaComponent implements OnInit {
   filterData:string = '';
   filterKeys = ['nombre', 'apellido_paterno', 'apellido-materno', 'rut'];
 
-  private matriculas = [];
-  private cursos = [];
+  public matriculas = [];
+  public cursos = [];
 
   selectedMatricula_id: number;
   selectedMatricula: any;

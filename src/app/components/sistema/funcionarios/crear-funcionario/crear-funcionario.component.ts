@@ -35,7 +35,7 @@ export class CrearFuncionarioComponent implements OnInit {
   public selectRolesNoDocentesData: Array<Select2OptionData> = [];
   public selectRolesOptions: Select2Options;
 
-  private funcionario = {
+  public funcionario = {
     'usuario':{
       'nombre':null,
       'apellido_paterno':null,
@@ -62,8 +62,8 @@ export class CrearFuncionarioComponent implements OnInit {
       'valor':null,
     },
   };
-  private rolesDocentes = [];
-  private rolesNoDocentes = [];
+  public rolesDocentes = [];
+  public rolesNoDocentes = [];
 
   constructor(
     private location: Location,
