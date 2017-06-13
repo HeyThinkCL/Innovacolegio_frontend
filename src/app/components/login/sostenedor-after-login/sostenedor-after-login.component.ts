@@ -12,7 +12,7 @@ import { ColegiosService } from '../../../services/sistema/colegios.service'
 })
 export class SostenedorAfterLoginComponent implements OnInit {
 
-  private colegios = [];
+  public colegios = [];
 
   constructor(private router: Router,private colegiosService: ColegiosService,) {
     //find better way to reload js

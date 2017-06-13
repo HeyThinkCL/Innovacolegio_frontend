@@ -15,7 +15,7 @@ export class VerColegioComponent implements OnInit {
   @ViewChild('modal')
   modal: ModalComponent;
 
-  private colegios = [];
+  public colegios = [];
   selectedColegio_id: number;
   filterData:string  = '';
   filterKeys = ['nombre','razon_social','dependencia','sostenedor','depto_prov'];

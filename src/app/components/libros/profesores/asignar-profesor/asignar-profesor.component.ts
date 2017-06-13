@@ -20,7 +20,7 @@ export class AsignarProfesorComponent implements OnInit {
   @ViewChild('confirmModal') confirmModal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   profesor: any;
 

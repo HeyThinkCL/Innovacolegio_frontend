@@ -19,7 +19,7 @@ export class ByGradoComponent implements OnInit {
   selected: any;
   selectedHolder: any;
 
-  private grados = [];
+  public grados = [];
 
   constructor(
     private cursosService: CursosService,

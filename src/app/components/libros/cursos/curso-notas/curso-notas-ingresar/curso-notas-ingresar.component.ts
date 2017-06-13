@@ -55,9 +55,9 @@ export class CursoNotasIngresarComponent implements OnInit {
   };
 
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private notasCongif: any = {};
+  public notasCongif: any = {};
   decimals: string;
 
   renderView: boolean;

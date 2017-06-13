@@ -15,8 +15,8 @@ export class VerElectivosComponent implements OnInit {
   filterData:string  = '';
   filterKeys = ['nombre'];
 
-  private electivos = [];
-  private planesDeEstudio = [];
+  public electivos = [];
+  public planesDeEstudio = [];
 
   constructor(
     private router: Router,

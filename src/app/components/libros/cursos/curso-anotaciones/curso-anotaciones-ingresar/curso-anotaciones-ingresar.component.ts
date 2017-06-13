@@ -17,7 +17,7 @@ export class CursoAnotacionesIngresarComponent implements OnInit {
   @ViewChild('confirm') confirm: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   //actualmente sólo con profesores, se debe llenar con todo tipo de funcionarios en la plataforma
   funcionarios = [];

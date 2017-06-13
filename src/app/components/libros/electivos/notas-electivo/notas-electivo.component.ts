@@ -13,12 +13,12 @@ import {PlanDeEstudiosService} from "../../../../services/sistema/configuracione
 export class NotasElectivoComponent implements OnInit {
 
   electivo: any;
-  private planesDeEstudio = [];
+  public planesDeEstudio = [];
 
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private currentTabPath: string = '';
+  public currentTabPath: string = '';
   tabs = [
     {"id":1,"path":'ver',"label":"Ver","icon":"icon-eye"},
     {"id":2,"path":'ingresar',"label":"Ingresar","icon":"icon-plus"},

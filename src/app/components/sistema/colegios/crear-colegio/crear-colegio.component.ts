@@ -43,7 +43,7 @@ export class CrearColegioComponent implements OnInit {
   public selectEstadoCivilData: Array<Select2OptionData> = [];
   public selectEstadoCivilOptions: Select2Options;
 
-  private funcionario = {
+  public funcionario = {
     'usuario':{
       'nombre':null,
       'apellido_paterno':null,

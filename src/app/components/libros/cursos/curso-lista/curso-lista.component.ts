@@ -17,7 +17,7 @@ export class CursoListaComponent implements OnInit {
   @ViewChild('activarModal') activarModal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   curso: any;
   alumnos = [];

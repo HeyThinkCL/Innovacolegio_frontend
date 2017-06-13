@@ -18,7 +18,7 @@ export class ColegioDetailComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   colegio: any;
 

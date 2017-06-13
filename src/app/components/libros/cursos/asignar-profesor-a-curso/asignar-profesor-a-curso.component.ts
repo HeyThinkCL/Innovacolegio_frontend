@@ -20,7 +20,7 @@ export class AsignarProfesorACursoComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   timeoutMessage: string;
 

@@ -19,7 +19,7 @@ export class VerProfesoresComponent implements OnInit {
     }
   ];
 
-  private profesores = [];
+  public profesores = [];
 
   timeoutMessage: string;
 

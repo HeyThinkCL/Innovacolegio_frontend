@@ -19,7 +19,7 @@ export class EditarColegioComponent implements OnInit {
   @ViewChild('warning') warningModal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   selectedColegio: any;
   colegio: Colegio;

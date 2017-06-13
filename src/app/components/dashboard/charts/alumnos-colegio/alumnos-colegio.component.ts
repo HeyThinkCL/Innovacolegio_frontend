@@ -8,11 +8,11 @@ import {CursosService} from "../../../../services/libros/cursos.service";
 })
 export class AlumnosColegioComponent implements OnInit {
 
-  private cursos = [];
+  public cursos = [];
 
-  private renderChart = false;
+  public renderChart = false;
 
-  private chartLabeledData = [];
+  public chartLabeledData = [];
 
   // Doughnut
   public doughnutChartLabels:string[] = [];

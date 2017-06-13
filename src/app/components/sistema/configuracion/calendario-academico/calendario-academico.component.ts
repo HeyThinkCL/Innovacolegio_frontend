@@ -37,13 +37,9 @@ import {CalendarioService} from '../../../../services/sistema/configuraciones/ca
 export class CalendarioAcademicoComponent implements OnInit {
   @ViewChild('modal') modal: ModalComponent;
 
-  private configId;
-  private configuracion = {
-    'periodo_academico':{
-      'glosa':'',
-      'fecha_inicio':null,
-      'fecha_termino':null,
-    },
+  public configId;
+  public configuracion = {
+    'periodo_academico':[],
     'vacaciones':[
       /*{
         'glosa':'',
@@ -51,14 +47,10 @@ export class CalendarioAcademicoComponent implements OnInit {
         'fecha_termino':null,
       }*/
     ],
-    'fechas_especiales':[
-      /*{
-        'glosa':'',
-        'fecha_inicio':null,
-        'fecha_termino':null,
-      }*/
-    ]
+    'fechas_especiales':[]
   };
+
+  public trimestre: boolean = false;
 
   constructor(
     private location: Location,
@@ -74,7 +66,6 @@ export class CalendarioAcademicoComponent implements OnInit {
         if(res){
           this.calendarioService.getConfigCalendarioAcademicoById(this.configId).subscribe(subRes => {
             this.configuracion = subRes;
-
             this.formatDates(this.configuracion);
           })
         } else {
@@ -175,6 +166,33 @@ export class CalendarioAcademicoComponent implements OnInit {
         }
       })
     })
+  }
+
+  trimestral(){
+    if(this.trimestre && this.configuracion.periodo_academico.length<3){
+      for(let p in this.configuracion.periodo_academico){
+        if(+p == 0){
+          this.configuracion.periodo_academico[p].glosa = "Primer Trimestre";
+        } else {
+          this.configuracion.periodo_academico[p].glosa = "Segundo Trimestre";
+        }
+      }
+      this.configuracion.periodo_academico.push({
+        'glosa':'Tercer Trimestre',
+        'fecha_inicio':null,
+        'fecha_termino':null,
+      });
+
+    } else if(!this.trimestre && this.configuracion.periodo_academico.length>2){
+      this.configuracion.periodo_academico.splice(2,1);
+      for(let p in this.configuracion.periodo_academico){
+        if(+p == 0){
+          this.configuracion.periodo_academico[p].glosa = "Primer Semestre";
+        } else {
+          this.configuracion.periodo_academico[p].glosa = "Segundo Semestre";
+        }
+      }
+    }
   }
 
   saveConfig(){

@@ -31,14 +31,14 @@ export class ModificarAsignaturaComponent implements OnInit {
   @ViewChild('modal')
   modal: ModalComponent;
 
-  private planesDeEstudio = [];
-  private asignatura: any;
+  public planesDeEstudio = [];
+  public asignatura: any;
 
-  private especial: boolean = false;
-  private selectEscalas = [];
+  public especial: boolean = false;
+  public selectEscalas = [];
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   constructor(
     private route: ActivatedRoute,

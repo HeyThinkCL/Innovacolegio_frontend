@@ -18,7 +18,7 @@ export class CursoAnotacionesVerComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   alumnos: any[] = [];
   selectedAlumno: any;

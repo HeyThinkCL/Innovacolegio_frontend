@@ -39,7 +39,7 @@ export class CursoAsistenciaIngresarComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   viewDate: Date;
   weekStartsOn: number;
@@ -49,9 +49,9 @@ export class CursoAsistenciaIngresarComponent implements OnInit {
   month = [];
   selectedDay: any;
 
-  private calendarConfig: any;
+  public calendarConfig: any;
 
-  private alumnos = [];
+  public alumnos = [];
 
   constructor(
     private router: Router,

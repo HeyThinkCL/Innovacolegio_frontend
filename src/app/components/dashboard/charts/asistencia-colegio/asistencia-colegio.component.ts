@@ -9,9 +9,9 @@ import {DashboardService} from '../../../../services/dashboard.service'
 })
 export class AsistenciaColegioComponent implements OnInit {
 
-  private data: any;
+  public data: any;
 
-  private renderChart:boolean = false;
+  public renderChart:boolean = false;
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,

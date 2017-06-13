@@ -16,7 +16,7 @@ export class CursoAnotacionesVerGenComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   anotaciones = [];
   selectedAnotacion: any = {};

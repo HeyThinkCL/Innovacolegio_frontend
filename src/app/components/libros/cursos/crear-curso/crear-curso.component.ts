@@ -19,8 +19,8 @@ export class CrearCursoComponent implements OnInit {
   @ViewChild('modal')
   modal: ModalComponent;
 
-  private default_date: Date;
-  private curso: any ={
+  public default_date: Date;
+  public curso: any ={
     'anio':null,
     'plan_id':null,
     'ensenanza_id':null,

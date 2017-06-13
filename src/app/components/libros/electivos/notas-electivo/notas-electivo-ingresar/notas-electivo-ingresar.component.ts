@@ -20,9 +20,9 @@ export class NotasElectivoIngresarComponent implements OnInit {
   @ViewChild('modalConfigInfo') modalConfigInfo: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private notasCongif: any = {};
+  public notasCongif: any = {};
   decimals: string;
 
   renderView: boolean;

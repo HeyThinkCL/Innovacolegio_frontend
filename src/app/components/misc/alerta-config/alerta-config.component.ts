@@ -8,7 +8,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class AlertaConfigComponent implements OnInit {
   id: number;
-  private sub: any;
+  public sub: any;
 
   configName: string;
 

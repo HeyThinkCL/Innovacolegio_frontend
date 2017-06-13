@@ -39,7 +39,7 @@ export class CursoAsistenciaVerComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   viewDate: Date;
   weekStartsOn: number;
@@ -49,7 +49,7 @@ export class CursoAsistenciaVerComponent implements OnInit {
   month = [];
   selectedDay: any;
 
-  private calendarConfig: any;
+  public calendarConfig: any;
 
   constructor(
     private route: ActivatedRoute,

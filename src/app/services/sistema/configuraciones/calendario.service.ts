@@ -45,11 +45,18 @@ export class CalendarioService {
     let url = `${this.configuracionUrl}/configuraciones/calendario_academicos?id=${idConfig}`;
 
     let payload = {
-      'periodo_academico':{
-        'glosa':'',
-        'fecha_inicio':null,
-        'fecha_termino':null,
-      },
+      'periodo_academico':[
+        {
+          'glosa':'',
+          'fecha_inicio':null,
+          'fecha_termino':null,
+        },
+        {
+          'glosa':'',
+          'fecha_inicio':null,
+          'fecha_termino':null,
+        }
+      ],
       'vacaciones':[
         {
           'glosa':'',

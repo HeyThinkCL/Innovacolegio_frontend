@@ -28,11 +28,11 @@ export class NotasElectivoVerComponent implements OnInit {
 
   cursos = [];
 
-  private notasCongif: any = {};
+  public notasCongif: any = {};
   decimals: string;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   constructor(
     private router: Router,

@@ -15,7 +15,7 @@ import {CursosService} from "../../../../services/libros/cursos.service";
 export class CrearElectivoComponent implements OnInit {
   @ViewChild('modal') modal: ModalComponent;
 
-  private electivo = {
+  public electivo = {
     'nombre':null,
   };
 

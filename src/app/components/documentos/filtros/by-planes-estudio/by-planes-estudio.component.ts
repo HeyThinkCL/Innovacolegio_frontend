@@ -20,8 +20,8 @@ export class ByPlanesEstudioComponent implements OnInit {
   selected: any;
   selectedHolder: any;
 
-  private planesDeEstudio = [];
-  private tiposDeEnsenanza = [];
+  public planesDeEstudio = [];
+  public tiposDeEnsenanza = [];
 
   constructor(
     private planDeEStudiosService: PlanDeEstudiosService,

@@ -25,8 +25,8 @@ export class AsignaturasEspecialesComponent implements OnInit {
 
   allAsignaturas = [];
 
-  private configId;
-  private configuracion = {
+  public configId;
+  public configuracion = {
     'asignatura':{
       'nombre':null,
     },

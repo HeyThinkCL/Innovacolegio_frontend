@@ -9,9 +9,56 @@
   <div class="col-md-9 col-md-offset-1">
     <div class="card">
       <div class="card-header">
+        <div class="title-bar-actions">
+          <div class="form-group">
+            <label class="control-label col-md-3"> Trimestral </label>
+            <div class="col-md-6 col-md-offset-3">
+              <label class="switch switch-info">
+                <input class="switch-input" type="checkbox" [(ngModel)]="trimestre" (change)="trimestral()">
+                <span class="switch-track"></span>
+                <span class="switch-thumb"></span>
+              </label>
+            </div>
+          </div>
+        </div>
         <h3 class="card-title fw-l">Periodo Académico</h3>
       </div>
-      <div class="card-body">
+      <div class="card-header" *ngFor="let periodo of configuracion?.periodo_academico; let currentIndex = index">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-3">
+              <input class="form-control" type="text" [(ngModel)]="periodo.glosa" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" >Fecha Inicio</label>
+            <div class="col-sm-3">
+              <div class="input-with-icon">
+                <input class="form-control"
+                       [(ngModel)]="periodo.fecha_inicio"
+                       ng2-datetime-picker
+                       close-on-select="true"
+                       date-only="true"
+                       date-format="DD-MM-YYYY">
+                <span class="icon icon-calendar input-icon"></span>
+              </div>
+            </div>
+            <label class="control-label col-sm-2" >Fecha Término</label>
+            <div class="col-sm-3">
+              <div class="input-with-icon">
+                <input class="form-control"
+                       [(ngModel)]="periodo.fecha_termino"
+                       ng2-datetime-picker
+                       close-on-select="true"
+                       date-only="true"
+                       date-format="DD-MM-YYYY">
+                <span class="icon icon-calendar input-icon"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="card-body">
         <div class="form form-horizontal">
           <div class="form-group">
             <label class="control-label col-sm-2" for="form-control-1">Fecha Inicio</label>
@@ -40,7 +87,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <div class="card">

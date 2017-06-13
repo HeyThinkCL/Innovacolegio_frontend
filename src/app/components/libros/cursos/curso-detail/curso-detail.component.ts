@@ -12,15 +12,15 @@ import { ConfiguracionService } from '../../../../services/sistema/configuracion
 })
 export class CursoDetailComponent implements OnInit {
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private curso: any;
-  private cursos = [];
+  public curso: any;
+  public cursos = [];
 
-  private planesDeEstudio = [];
+  public planesDeEstudio = [];
 
-  private currentTabPath: string = '';
-  private tabs = [
+  public currentTabPath: string = '';
+  public tabs = [
     {"id":1,"path":'lista',"label":"Lista Curso","icon":"icon-users"},
     {"id":2,"path":'notas',"label":"Notas","icon":"icon-check-square-o"},
     {"id":3,"path":'asistencia',"label":"Asistencia","icon":"icon-calendar-check-o"},

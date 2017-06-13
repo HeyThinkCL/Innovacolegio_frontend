@@ -19,7 +19,7 @@ export class ModificarCursoComponent implements OnInit {
   modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
   curso: any;
   selectedCurso: any;

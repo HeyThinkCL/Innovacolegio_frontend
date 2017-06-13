@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CursoAsistenciaComponent implements OnInit {
 
-  private currentTabPath: string = '';
+  public currentTabPath: string = '';
   tabs = [
     {"id":1,"path":'ver',"label":"Ver","icon":"icon-eye"},
     {"id":2,"path":'ingresar',"label":"Ingresar","icon":"icon-plus"},

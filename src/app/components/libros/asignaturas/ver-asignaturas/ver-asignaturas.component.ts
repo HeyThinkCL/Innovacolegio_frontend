@@ -15,8 +15,8 @@ export class VerAsignaturasComponent implements OnInit {
   filterData:string  = '';
   filterKeys = ['nombre'];
 
-  private asignaturas = [];
-  private planesDeEstudio = [];
+  public asignaturas = [];
+  public planesDeEstudio = [];
 
   constructor(
     private router: Router,

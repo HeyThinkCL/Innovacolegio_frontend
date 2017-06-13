@@ -15,12 +15,12 @@ export class ModificarElectivoComponent implements OnInit {
   @ViewChild('modal') modal: ModalComponent;
 
   id: number;
-  private sub: any;
+  public sub: any;
 
-  private electivo: any;
-  private selectedAlumnos = [];
-  private initSelectedAlumnos = [];
-  private cursos = [];
+  public electivo: any;
+  public selectedAlumnos = [];
+  public initSelectedAlumnos = [];
+  public cursos = [];
 
   constructor(
     private location: Location,

@@ -29,7 +29,7 @@ export class VerCursoComponent implements OnInit {
     }
   ];
 
-  private planesDeEstudio = [];
+  public planesDeEstudio = [];
   selectedCurso_id: number;
 
   timeoutMessage: string;
