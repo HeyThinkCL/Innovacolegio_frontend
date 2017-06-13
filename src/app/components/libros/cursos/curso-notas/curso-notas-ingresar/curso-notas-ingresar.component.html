@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
-    <app-spinner *ngIf="!(asignaturas.length>0 && notasCongif.notas && notasCongif.notas.decimales && notasCongif.notas.aprox)"></app-spinner>
-    <div class="panel" *ngIf="asignaturas.length>0 && notasCongif.notas && notasCongif.notas.decimales && notasCongif.notas.aprox">
+    <app-spinner *ngIf="!(asignaturas.length>0 && notasCongif.notas && notasCongif.notas.decimales && notasCongif.notas.aprox && calendarConfig)"></app-spinner>
+    <div class="panel" *ngIf="asignaturas.length>0 && notasCongif.notas && notasCongif.notas.decimales && notasCongif.notas.aprox && calendarConfig">
       <div class="panel-heading">
         <div class="row gutter-xs">
           <div class="col-md-8">
@@ -150,9 +150,9 @@
     <div class="demo-form-wrapper">
       <div class="form form-horizontal">
         <div class="form-group">
-          <label class="col-sm-3 control-label" for="form-control-3">Nota - Contenido</label>
+          <label class="col-sm-3 control-label" for="form-control-5">Nota - Contenido</label>
           <div class="col-sm-7">
-            <select id="form-control-4"
+            <select id="form-control-5"
                     class="form-control"
                     type="text"
                     [(ngModel)]="index"
@@ -212,10 +212,21 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 col-sm-offset-1 control-label" for="form-control-2">Fecha de Evaluación</label>
-          <div class="col-sm-4">
+          <label class="col-sm-2 control-label" for="form-control-2" >Periodo</label>
+          <div class="col-sm-3" *ngIf="periodos.length>1">
+            <select id="form-control-2"
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="createdNota.periodo">
+              <option disabled selected [value]="null"> Seleccionar Periodo </option>
+              <option *ngFor="let p of periodos" [value]="p.id">{{p.text}}</option>
+            </select>
+          </div>
+
+          <label class="col-sm-2 control-label" for="form-control-3">Fecha de Evaluación</label>
+          <div class="col-sm-2">
             <div class="input-with-icon">
-              <input id="form-control-2"
+              <input id="form-control-3"
                      class="form-control"
                      [(ngModel)]="createdNota.fecha"
                      ng2-datetime-picker
@@ -225,19 +236,10 @@
               <span class="icon icon-calendar input-icon"></span>
             </div>
           </div>
-          <!--<div class="input-with-icon">
-            <input class="form-control" id="form-control-46"
 
-                   ng2-datetime-picker
-                   close-on-select="true"
-                   date-only="true"
-                   date-format="DD-MM-YYYY">
-            <span class="icon icon-calendar input-icon"></span>
-          </div>-->
-
-          <label class="col-sm-1 control-label" for="form-control-3">Coeficiente</label>
-          <div class="col-sm-2">
-            <input id="form-control-3"
+          <label class="col-sm-1 control-label" for="form-control-4">Coeficiente</label>
+          <div class="col-sm-1">
+            <input id="form-control-4"
                    class="form-control"
                    type="number" min="1" max="2"
                    [(ngModel)]="createdNota.coeficiente">
@@ -248,7 +250,7 @@
   </modal-body>
   <modal-footer>
     <button type="button" class="btn btn-default" (click)="modalCreateDismiss()">Cancelar</button>
-    <button type="button" class="btn btn-primary" (click)="modalCreateClose()" [disabled]="!(createdNota.coeficiente)">Continuar</button>
+    <button type="button" class="btn btn-primary" (click)="modalCreateClose()" [disabled]="!(createdNota.coeficiente && evalInRange())">Continuar</button>
   </modal-footer>
 </modal>
 

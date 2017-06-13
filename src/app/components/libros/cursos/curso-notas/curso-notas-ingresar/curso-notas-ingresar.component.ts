@@ -2,10 +2,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 
+/** date-fns**/
+import {
+  isSameDay,
+  isAfter,
+  isBefore} from 'date-fns';
+
 import { CursosService } from '../../../../../services/libros/cursos.service';
 import { NotasService } from '../../../../../services/libros/notas.service';
 import {ConfiguracionService} from '../../../../../services/sistema/configuracion.service';
 import { ConfigNotasService } from '../../../../../services/sistema/configuraciones/config-notas.service';
+import {CalendarioService} from "../../../../../services/sistema/configuraciones/calendario.service";
 
 @Component({
   selector: 'app-curso-notas-ingresar',
@@ -29,11 +36,13 @@ export class CursoNotasIngresarComponent implements OnInit {
     'contenido':'',
     'fecha':'',
     'coeficiente':null,
+    'periodo':null
   };
   createdNota = {
     'contenido':'',
     'fecha':'',
     'coeficiente':null,
+    'periodo':null
   };
   notaToDelete = {
     'evaluacion': {},
@@ -60,6 +69,9 @@ export class CursoNotasIngresarComponent implements OnInit {
   public notasCongif: any = {};
   decimals: string;
 
+  public calendarConfig: any;
+  public periodos = [];
+
   renderView: boolean;
 
   constructor(
@@ -69,6 +81,7 @@ export class CursoNotasIngresarComponent implements OnInit {
     private route: ActivatedRoute,
     private configuracionService: ConfiguracionService,
     private configNotasService: ConfigNotasService,
+    private calendarioService: CalendarioService,
   ) { }
 
   ngOnInit() {
@@ -110,6 +123,48 @@ export class CursoNotasIngresarComponent implements OnInit {
               }
             }
 
+          });
+
+          config = configs.find(c => c.glosa == 'Calendario Académico' && c.colegio_id == +JSON.parse(localStorage.getItem('currentUser')).colegioId);
+          this.calendarioService.getConfigCalendarioAcademicoById(config.id).subscribe(subRes => {
+            if(subRes && subRes.periodo_academico && (subRes.periodo_academico.length>1)){
+
+              this.calendarConfig = subRes;
+
+              if(this.calendarConfig.periodo_academico.length==2){
+                this.periodos.push({
+                  id:1,
+                  text:"Primer Semestre"
+                });
+                this.periodos.push({
+                  id:2,
+                  text:"Segundo Semestre"
+                });
+              }
+
+              if(this.calendarConfig.periodo_academico.length==3){
+                this.periodos.push({
+                  id:1,
+                  text:"Primer Trimestre"
+                });
+                this.periodos.push({
+                  id:2,
+                  text:"Segundo Trimestre"
+                });
+                this.periodos.push({
+                  id:3,
+                  text:"Tercer Trimestre"
+                });
+              }
+
+            } else {
+              let currentRol = +atob(atob(JSON.parse(localStorage.getItem('currentUser')).rol))[5];
+              if(currentRol==4||currentRol==5){
+                this.router.navigate(['app/alerta-configuracion',1]);
+              } else {
+                this.router.navigate(['app/sistema/configuracion/calendario']);
+              }
+            }
           });
         });
       });
@@ -216,6 +271,7 @@ export class CursoNotasIngresarComponent implements OnInit {
           'contenido':'',
           'fecha':'',
           'coeficiente':null,
+          'periodo':null
         };
         this.route.parent.parent.params
           .switchMap((params: Params) => this.cursosService.getAsignaturasByCursoId(params['id']))
@@ -231,6 +287,7 @@ export class CursoNotasIngresarComponent implements OnInit {
           'contenido':'',
           'fecha':'',
           'coeficiente':null,
+          'periodo':null
         };
         this.route.parent.parent.params
           .switchMap((params: Params) => this.cursosService.getAsignaturasByCursoId(params['id']))
@@ -241,7 +298,17 @@ export class CursoNotasIngresarComponent implements OnInit {
           });
       });
     }
+  }
 
+  evalInRange(){
+    if(this.createdNota.periodo && this.createdNota.fecha){
+      let periodo = this.calendarConfig.periodo_academico[this.createdNota.periodo-1];
+      let day = this.createdNota.fecha;
+      let start = periodo.fecha_inicio;
+      let end = periodo.fecha_termino;
+      return ((isAfter(day,start) && isBefore(day,end)) || isSameDay(day,start) || isSameDay(day,end));
+    }
+    return false;
   }
 
   deleteNota(){
@@ -353,6 +420,7 @@ export class CursoNotasIngresarComponent implements OnInit {
       'contenido':'',
       'fecha':'',
       'coeficiente':null,
+      'periodo':null
     };
     this.modalInfo.close();
   }
