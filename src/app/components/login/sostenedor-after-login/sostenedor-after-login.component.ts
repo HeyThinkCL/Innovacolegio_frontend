@@ -55,7 +55,7 @@ export class SostenedorAfterLoginComponent implements OnInit {
   }
 
   goToDashboard(){
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   selectColegio(colegioId: number){

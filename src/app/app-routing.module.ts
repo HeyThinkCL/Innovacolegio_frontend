@@ -113,6 +113,7 @@ import { AsignaturasEspecialesComponent } from './components/sistema/configuraci
 //Documentos
 import { DocumentosComponent } from './components/documentos/documentos.component';
 import { InformesComponent } from './components/documentos/informes/informes.component';
+import { Informes2Component } from './components/documentos/informes2/informes2.component';
 import { CertificadosComponent } from './components/documentos/certificados/certificados.component';
 import { CitacionesComponent } from './components/documentos/citaciones/citaciones.component';
 
@@ -240,6 +241,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'informes', pathMatch: 'full' },
       { path: 'informes', component: InformesComponent },
+      { path: 'informes2', component: Informes2Component },
       { path: 'certificados', component: CertificadosComponent },
       { path: 'citaciones', component: CitacionesComponent },
     ]

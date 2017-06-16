@@ -121,6 +121,7 @@ import { ElectivoDetailComponent } from './components/libros/electivos/electivo-
 //Documentos
 import { DocumentosComponent } from './components/documentos/documentos.component';
 import { InformesComponent } from './components/documentos/informes/informes.component';
+import { Informes2Component } from './components/documentos/informes2/informes2.component';
 import { CertificadosComponent } from './components/documentos/certificados/certificados.component';
 import { CitacionesComponent } from './components/documentos/citaciones/citaciones.component';
 import { ByPlanesEstudioComponent } from './components/documentos/filtros/by-planes-estudio/by-planes-estudio.component';
@@ -221,6 +222,7 @@ import { AlumnosColegioComponent } from './components/dashboard/charts/alumnos-c
     CursoAnotacionesIngresarComponent,
     DocumentosComponent,
     InformesComponent,
+    Informes2Component,
     CertificadosComponent,
     CitacionesComponent,
     ByTipoEnsenanzaComponent,
