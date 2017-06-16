@@ -4,27 +4,31 @@
       <div class="panel-heading">
         <div class="row">
           <div class="col-md-2">
-            <div class="panel-title">
+            <h4 class="panel-title">
               Alumnos
-            </div>
+            </h4>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" *ngIf="!collapse">
             <div class="input-with-icon">
               <input class="form-control input-thick" type="text" placeholder="Buscar..." [(ngModel)]="filterData">
               <span class="icon icon-search input-icon"></span>
             </div>
           </div>
-          <div class="col-md-2 col-md-offset-1">
-            <div class="btn-group fit-width">
-              <!--<button class="btn btn-block btn-outline-primary"
-                      (click)="selectAll()"
-                      [ngClass]="{'active': disabledSelect}">Seleccionar Todos
-              </button>-->
+          <div class="col-md-4">
+            <div class="btn-group">
+              <button class="btn btn-info"
+                      (click)="collapse = !collapse"> Colapsar Lista
+              </button>
+              <button class="btn btn-outline-primary"
+                      *ngIf="!collapse"
+                      (click)="filterBySelection()"
+                      [ngClass]="{'active': filterSelected.length>0 }"> Mostrar Seleccionados
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="panel-body" *ngIf="!(disabledSelect)">
+      <div class="panel-body" *ngIf="!(disabledSelect) && !collapse">
         <div class="table-responsive">
           <table class="table table-middle table-bordered table-hover">
             <thead>
@@ -35,7 +39,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let alumno of alumnos | filterArray:filterData:filterKeys"
+            <tr *ngFor="let alumno of alumnos | FilterSelected:filterSelected | filterArray:filterData:filterKeys"
                 (click)="selectAlumno(alumno.id)" [ngClass]="{'bg-info':include(selected,alumno.id)}">
               <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.nombre}}</td>
               <td [ngClass]="{'desiste':alumno.desiste }">{{alumno.apellido_paterno}} {{alumno.apellido_materno}}</td>

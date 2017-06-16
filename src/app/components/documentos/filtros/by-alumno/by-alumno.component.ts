@@ -16,11 +16,13 @@ export class ByAlumnoComponent implements OnInit {
   alumnos = [];
 
   public disabledSelect: boolean;
+  public collapse: boolean;
   selected = [];
   selectedHolder = [];
 
   filterData = '';
   filterKeys = ['nombre','apellido_paterno','apellido_materno','rut'];
+  filterSelected = [];
 
   constructor(
     private matriculaService: MatriculaService,
@@ -28,6 +30,7 @@ export class ByAlumnoComponent implements OnInit {
 
   ngOnInit() {
     this.disabledSelect = false;
+    this.collapse = false;
     this.matriculaService.getMatriculas().subscribe(alumnos => {
       this.alumnos = alumnos;
     })
@@ -74,6 +77,14 @@ export class ByAlumnoComponent implements OnInit {
 
   emitSelection(){
     this.onSelect.emit(this.selected);
+  }
+
+  filterBySelection(){
+    if(this.filterSelected.length>0){
+      this.filterSelected = [];
+    } else {
+      this.filterSelected = JSON.parse(JSON.stringify(this.selected));
+    }
   }
 
   warningModalOpen(){

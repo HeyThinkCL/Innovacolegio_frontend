@@ -20,8 +20,10 @@ export class ByCursoComponent implements OnInit {
                   'subKeys':['grado','curso']
                 }
               ];
+  filterSelected = [];
 
   public disabledSelect: boolean;
+  public collapse: boolean;
   selected = [];
   selectedHolder = [];
 
@@ -31,6 +33,7 @@ export class ByCursoComponent implements OnInit {
 
   ngOnInit() {
     this.disabledSelect = false;
+    this.collapse = false;
     this.cursosService.getCursos().subscribe(cursos => {
       this.cursos = cursos;
     })
@@ -73,6 +76,14 @@ export class ByCursoComponent implements OnInit {
 
   emitSelection(){
     this.onSelect.emit(this.selected);
+  }
+
+  filterBySelection(){
+    if(this.filterSelected.length>0){
+      this.filterSelected = [];
+    } else {
+      this.filterSelected = JSON.parse(JSON.stringify(this.selected));
+    }
   }
 
 }

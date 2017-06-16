@@ -19,6 +19,7 @@ import {ShowEvalEspecialPipe } from './pipes/show-eval-especial.pipe'
 import { TruncateTextPipe } from './pipes/truncate-text.pipe';
 import { AbbreviatePipe } from './pipes/abbreviate.pipe'
 import {FilterTablePipe} from "./pipes/filter-table.pipe";
+import {FilterSelectedPipe} from "./pipes/filter-selected.pipe";
 import {Select2WidthFixPipe } from "./pipes/select2-width-fix.pipe"
 import {FilterProfByAsign } from "./pipes/filter-prof-asignatura"
 import {FilterAsignaturas } from "./pipes/filter-asignaturas"
@@ -250,6 +251,7 @@ import { AlumnosColegioComponent } from './components/dashboard/charts/alumnos-c
     TruncateTextPipe,
     AbbreviatePipe,
     FilterTablePipe,
+    FilterSelectedPipe,
     Select2WidthFixPipe,
     FilterProfByAsign,
     FilterAsignaturas,
