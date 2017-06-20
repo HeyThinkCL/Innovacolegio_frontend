@@ -115,6 +115,7 @@ import { DocumentosComponent } from './components/documentos/documentos.componen
 import { InformesComponent } from './components/documentos/informes/informes.component';
 import { Informes2Component } from './components/documentos/informes2/informes2.component';
 import { CertificadosComponent } from './components/documentos/certificados/certificados.component';
+import { Certificados2Component } from './components/documentos/certificados2/certificados2.component';
 import { CitacionesComponent } from './components/documentos/citaciones/citaciones.component';
 
 const routes: Routes = [
@@ -240,9 +241,8 @@ const routes: Routes = [
   { path: 'docs', component: DocumentosComponent, canActivate:[DigitadorGuard], canActivateChild:[DigitadorGuardChild],
     children: [
       { path: '', redirectTo: 'informes', pathMatch: 'full' },
-      { path: 'informes', component: InformesComponent },
-      { path: 'informes2', component: Informes2Component },
-      { path: 'certificados', component: CertificadosComponent },
+      { path: 'informes', component: Informes2Component },
+      { path: 'certificados', component: Certificados2Component },
       { path: 'citaciones', component: CitacionesComponent },
     ]
   },

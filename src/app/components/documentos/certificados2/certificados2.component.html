@@ -1,0 +1,278 @@
+<div class="title-bar">
+  <h1 class="title-bar-title"><span class="icon icon-fw icon-files-o"></span> Certificados</h1>
+  <p class="title-bar-description">
+  </p>
+</div>
+
+<div class="row pos-r">
+  <div class="p-x-sm" [ngClass]="{'col-sm-12':(docsToGenerate.length<1), 'col-sm-8':(docsToGenerate.length>0)}">
+
+    <div class="row gutter-xs" id="docs-select" *ngIf="docToGen.docId==null" [@collapse]="true">
+      <div class="col-md-12">
+        <div class="title-bar">
+          <h5 class="title-bar-title">Documentos</h5>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-sm-6" *ngFor="let doc of docs">
+          <div class="card" (click)="setDocumento(doc.id)">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-middle media-left">
+              <span class="circle sq-36"
+                    [ngClass]="{'bg-info': include(docsId,doc.id), 'bg-info-inverse': !(include(docsId,doc.id))}">
+                <span class="icon icon-file-o"></span>
+              </span>
+                </div>
+                <div class="media-middle media-body">
+                  <h4 class="media-heading fw-l">{{doc.nombre}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="!(docToGen.docId==null)" [@shrink]="true">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-middle media-left">
+              <span class="circle sq-36 bg-info">
+                <span class="icon icon-file-o"></span>
+              </span>
+          </div>
+          <div class="media-middle media-body">
+            <h4 class="media-heading fw-l">{{ getDocName(docToGen.docId) }}</h4>
+          </div>
+          <div class="media-middle media-right">
+            <a class="btn btn-block btn-outline-default" (click)="unsetDocumento()">
+              <span class="icon icon-fw icon-remove"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="options-select" *ngIf="!(docToGen.docId==null) && docToGen.options==null" [@collapse]="true">
+      <div class="col-md-12">
+        <div class="title-bar">
+          <h5 class="title-bar-title">Opciones</h5>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-middle media-left">
+                <span class="circle sq-36 bg-info-inverse">
+                  <span class="icon icon-gears"></span>
+                </span>
+              </div>
+              <div class="media-middle media-body">
+                <div class="form form-group-sm">
+
+                  <label class="col-sm-2 control-label" for="form-control-1">Año Lectivo</label>
+                  <div class="col-sm-4">
+                    <select id="form-control-1"
+                            class="form-control"
+                            [(ngModel)]="options.year">
+                      <option [value]="null"></option>
+                      <option *ngFor="let y of years.sort().reverse()"
+                              [value]="y">{{y}}</option>
+                    </select>
+                  </div>
+
+                  <label class="col-sm-2 control-label" for="form-control-2">Periodo</label>
+                  <div class="col-sm-4" *ngIf="!(options.year==null)">
+                    <select id="form-control-2"
+                            class="form-control"
+                            type="text"
+                            [(ngModel)]="options.periodo"
+                            [disabled]="options.year==null">
+                      <option [value]="null"></option>
+                      <option *ngFor="let p of getPeriodoSelect(options.year)"
+                              [value]="p.value">{{p.text}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="media-middle media-left">
+                <button class="btn btn-block btn-info" [disabled]="options.periodo==null" (click)="setOpciones()">
+                  <span class="icon icon-check"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="!(docToGen.options==null)" [@shrink]="true">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-middle media-left">
+              <span class="circle sq-36 bg-info">
+                <span class="icon icon-gears"></span>
+              </span>
+          </div>
+          <div class="media-middle media-body">
+            <div class="form form-group-sm">
+
+              <label class="col-sm-2 control-label" for="form-control-3">Año Lectivo</label>
+              <div class="col-sm-4">
+                <input id="form-control-3" [value]="docToGen.options.year" readonly>
+              </div>
+
+              <label class="col-sm-2 control-label" for="form-control-4">Periodo</label>
+              <div class="col-sm-4">
+                <input id="form-control-4" [value]="docToGen.options.periodo" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="media-middle media-right">
+            <a class="btn btn-block btn-outline-default" (click)="unsetOpciones()">
+              <span class="icon icon-fw icon-remove"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="filter-select" *ngIf="!(docToGen.options==null) && docToGen.filter==null" [@collapse]="true">
+      <div class="col-md-12">
+        <div class="title-bar">
+          <h5 class="title-bar-title">Filtros</h5>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row gutter-xs">
+          <div class="col-md-4" *ngFor="let f of filters">
+            <div class="card"
+                 (click)="setFiltro(f.id)">
+              <div class="card-body">
+                <div class="media">
+                  <div class="media-middle media-left">
+              <span class="circle sq-44 bg-info-inverse">
+                <span class="icon" [ngClass]="f.icon"></span>
+              </span>
+                  </div>
+                  <div class="media-middle media-body">
+                    <h4 class="media-heading fw-l">{{f.nombre}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="!(docToGen.filter==null)" [@shrink]="true">
+      <div class="card-body">
+        <div class="media">
+          <div class="media-middle media-left">
+              <span class="circle sq-36 bg-info">
+                <span class="icon"
+                      [ngClass]="getFilterIcon(docToGen.filter)"></span>
+              </span>
+          </div>
+          <div class="media-middle media-body">
+            <h4 class="media-heading fw-l">{{ getFilterName(docToGen.filter) }}</h4>
+          </div>
+          <div class="media-middle media-right">
+            <button class="btn btn-block btn-outline-default" (click)="unsetFiltro()">
+              <span class="icon icon-fw icon-remove"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-by-curso [docs]="docsId" (onSelect)="onSelectSubjects($event)"
+                  *ngIf="docToGen.filter == 4"
+                  [@collapse]="true"></app-by-curso>
+    <app-by-alumno [docs]="docsId" (onSelect)="onSelectSubjects($event)"
+                   *ngIf="docToGen.filter == 5"
+                   [@collapse]="true"></app-by-alumno>
+
+    <div *ngIf="subjectsId.length>0" [@shrink]="true">
+      <button class="btn btn-block btn-info" (click)="addDocToQueue()">
+        <span class="icon icon-plus btn-icon"></span>
+        <span class="text-uppercase"> Agregar Documento a la Cola</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!--<div class="divider divider-vertical" *ngIf="docsToGenerate.length>0">
+    <div class="divider-content">
+      <span class="icon icon-arrow-right"></span>
+    </div>
+  </div>-->
+
+  <div class="p-x-sm col-sm-4" *ngIf="docsToGenerate.length>0" [@fade]="true">
+    <div class="panel" >
+      <div class="panel-body">
+        <div class="list-group">
+          <a class="list-group-item" *ngFor="let doc of docsToGenerate; let currentIndex = index" [@shrink]="true">
+            <div class="media">
+              <div class="media-middle media-body">
+                <h5 class="media-heading">{{ getDocName(doc.docId) }}</h5>
+              </div>
+              <div class="media-left">
+                <button class="btn btn-outline-default" (click)="removeDocFromQueue(currentIndex)">
+                  <span class="icon icon-fw icon-remove"></span>
+                </button>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-block btn-outline-success"
+              (click)="generateDocs()">
+        <span class="icon icon-paper-plane-o btn-icon"></span> Generar Documentos
+      </button>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!--<div class="row" *ngIf="(docsId.length > 0)||optionId">
+  <div class="col-md-10 col-md-offset-1">
+    <button class="btn btn-block btn-outline-success"
+            [disabled]="(subjectsId.length == 0)||(docsId.length == 0)"
+            [ngClass]="{'active':!((subjectsId.length == 0)||(docsId.length == 0))}"
+            (click)="generateDocs()">
+      <span class="icon icon-paper-plane-o btn-icon"></span> Generar Documentos
+    </button>
+  </div>
+</div>-->
+
+<modal [animation]="true" #modal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Generando documentos.</h4>
+  </modal-header>
+  <modal-body>
+    <div class="panel">
+      <div class="panel-body text-center">
+        <div class="spinner spinner-primary spinner-lg pos-r sq-100"></div>
+      </div>
+    </div>
+  </modal-body>
+  <!--<modal-footer>
+    <button type="button" class="btn btn-primary" (click)="modalClose()">Ok</button>
+  </modal-footer>-->
+</modal>
+
+

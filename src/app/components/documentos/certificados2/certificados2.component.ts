@@ -2,14 +2,14 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {trigger,state,style,animate,transition} from '@angular/animations';
 
-import {InformesService} from '../../../services/documentos/informes.service';
+import {CertificadosService} from '../../../services/documentos/certificados.service';
 
 import * as globalVar from '../../../globals';
 
 @Component({
-  selector: 'app-informes2',
-  templateUrl: './informes2.component.html',
-  styleUrls: ['./informes2.component.css'],
+  selector: 'app-certificados2',
+  templateUrl: './certificados2.component.html',
+  styleUrls: ['./certificados2.component.css'],
   animations: [
     trigger(
       'collapse', [
@@ -49,7 +49,7 @@ import * as globalVar from '../../../globals';
     )
   ],
 })
-export class Informes2Component implements OnInit {
+export class Certificados2Component implements OnInit {
   @ViewChild('modal') modal: ModalComponent;
 
   public docsToGenerate: any[] = [];
@@ -83,20 +83,19 @@ export class Informes2Component implements OnInit {
   ];
 
   docs = [
-    {'id':1,'nombre':'Informe de Notas'},
-    {'id':2,'nombre':'Lista de Curso'},
-    {'id':3,'nombre':'Inasistencias por Curso'},
-    {'id':4,'nombre':'Resumen General del Curso'},
-    {'id':5,'nombre':'Asistencia del Colegio'},
-    {'id':6,'nombre':'Extranjeros'},
-    {'id':7,'nombre':'Indigenas'},
+    {'id':1,'nombre':'Certificado Matricula'},
+    {'id':2,'nombre':'Certificado Alumno Regular'},
+    {'id':3,'nombre':'Certificado de Inscripción'},
+    {'id':4,'nombre':'Certificado de Asistencia'},
+    {'id':5,'nombre':'Certificado de Traslado'},
+    // {'id':6,'nombre':'Ranking 4tos Medios'},
+    // {'id':8,'nombre':'Permiso de Salida'},
   ];
 
   filters = [
     // {'id':1,'nombre':'Por Plan de Estudios','icon':'icon-institution'},
     // {'id':2,'nombre':'Por Tipo de Enseñanza','icon':'icon-institution'},
     // {'id':3,'nombre':'Por Nivel','icon':'icon-mortar-board'},
-    {'id':0,'nombre':'Por Colegio','icon':'icon-institution'},
     {'id':4,'nombre':'Por Curso','icon':'icon-users'},
     {'id':5,'nombre':'Por Alumno','icon':'icon-user'},
   ];
@@ -106,7 +105,7 @@ export class Informes2Component implements OnInit {
   subjectsId: any[] = [];
 
   constructor(
-    private informesService: InformesService,
+    private certificadosService: CertificadosService,
   ) { }
 
   ngOnInit() {
@@ -171,7 +170,7 @@ export class Informes2Component implements OnInit {
   setFiltro(id){
     this.docToGen.filter = id;
     if(id==0){
-      this.subjectsId.push(this.informesService.getColegioId());
+      this.subjectsId.push(this.certificadosService.getColegioId());
     }
   }
 
@@ -201,22 +200,6 @@ export class Informes2Component implements OnInit {
 
   removeDocFromQueue(idx: number){
     this.docsToGenerate.splice(idx,1);
-  }
-
-  restrictFilters(){
-    let docId = this.docToGen.docId;
-    let _filters = JSON.parse(JSON.stringify(this.filters));
-    if(docId==1 || docId==2 || docId==3 || docId==4){
-      _filters.splice(_filters.findIndex(f => f.id==0),1);
-    }
-    if(docId==5){
-      _filters.splice(_filters.findIndex(f => f.id==4),2);
-    }
-    if(docId==2 || docId==3 || docId==4 || docId==6 || docId==7){
-      _filters.splice(_filters.findIndex(f => f.id==5),1);
-    }
-
-    return _filters;
   }
 
   include(arr,obj) {
@@ -252,6 +235,10 @@ export class Informes2Component implements OnInit {
     this.modal.close();
   }
 
+  getCertificadoAccidente(){
+    window.open(globalVar.apiUrl+'/'+'certificados/descargas/certificado_accidente.pdf');
+  }
+
   generateDocs(){
     let _wait:boolean[] = [];
 
@@ -262,10 +249,10 @@ export class Informes2Component implements OnInit {
     for(let d of this.docsToGenerate){
       if(d.docId==1){
         _wait.push(false);
-        this.informesService.generateInformeNotas(d.filter,d.subjects,d.options).subscribe(res => {
+        this.certificadosService.generateMatricula(d.filter,d.subjects).subscribe(res => {
           if(res && res.status){
             let url: string = globalVar.apiUrl+'/'+res.status;
-            window.open(url,'_blank');
+            window.open(url);
 
             let docIdx = this.docsToGenerate.findIndex(doc => doc.docId==d.docId);
             _wait[docIdx] = true;
@@ -274,11 +261,10 @@ export class Informes2Component implements OnInit {
             }
           }
         })
-
       }
       if(d.docId==2){
         _wait.push(false);
-        this.informesService.generateListaDeCurso(d.filter,d.subjects).subscribe(res => {
+        this.certificadosService.generateAlumnoRegular(d.filter,d.subjects).subscribe(res => {
           if(res && res.status){
             let url: string = globalVar.apiUrl+'/'+res.status;
             window.open(url);
@@ -290,11 +276,10 @@ export class Informes2Component implements OnInit {
             }
           }
         })
-
       }
       if(d.docId==3){
         _wait.push(false);
-        this.informesService.generateInasistenciaCurso(d.filter,d.subjects).subscribe(res => {
+        this.certificadosService.generateInscripcion(d.filter,d.subjects).subscribe(res => {
           if(res && res.status){
             let url: string = globalVar.apiUrl+'/'+res.status;
             window.open(url);
@@ -306,11 +291,10 @@ export class Informes2Component implements OnInit {
             }
           }
         })
-
       }
       if(d.docId==4){
         _wait.push(false);
-        this.informesService.generateResumenCurso(d.filter,d.subjects).subscribe(res => {
+        this.certificadosService.generateAsistencia(d.filter,d.subjects).subscribe(res => {
           if(res && res.status){
             let url: string = globalVar.apiUrl+'/'+res.status;
             window.open(url);
@@ -322,44 +306,13 @@ export class Informes2Component implements OnInit {
             }
           }
         })
-
       }
       if(d.docId==5){
         _wait.push(false);
-        this.informesService.generateAsistenciaColegio(d.filter,d.subjects).subscribe(res => {
+        this.certificadosService.generateTraslado(d.filter,d.subjects).subscribe(res => {
           if(res && res.status){
             let url: string = globalVar.apiUrl+'/'+res.status;
             window.open(url);
-
-            let docIdx = this.docsToGenerate.findIndex(doc => doc.docId==d.docId);
-            _wait[docIdx] = true;
-            if(!_wait.find(w => w==false)){
-              this.modalClose();
-            }
-          }
-        })
-      }
-      if(d.docId==6){
-        _wait.push(false);
-        this.informesService.generateInformeExtranjeros(d.filter,d.subjects).subscribe(res => {
-          if(res && res.status){
-            let url: string = globalVar.apiUrl+'/'+res.status;
-            window.open(url);
-
-            let docIdx = this.docsToGenerate.findIndex(doc => doc.docId==d.docId);
-            _wait[docIdx] = true;
-            if(!_wait.find(w => w==false)){
-              this.modalClose();
-            }
-          }
-        })
-      }
-      if(d.docId==7){
-        _wait.push(false);
-        this.informesService.generateInformeIndigenas(d.filter,d.subjects).subscribe(res => {
-          if(res && res.status){
-            let url: string = globalVar.apiUrl+'/'+res.status;
-            window.open(url,'_blank');
 
             let docIdx = this.docsToGenerate.findIndex(doc => doc.docId==d.docId);
             _wait[docIdx] = true;
@@ -371,8 +324,5 @@ export class Informes2Component implements OnInit {
       }
     }
 
-    this.docsToGenerate = [];
-
   }
-
 }

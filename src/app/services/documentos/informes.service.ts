@@ -27,11 +27,15 @@ export class InformesService {
     return JSON.parse(localStorage.getItem('currentUser')).userRol;
   }
 
-  generateInformeNotas(idFilter: number, subjects: any[]){
+  generateInformeNotas(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
         'sujetos': subjects,
+      },
+      'opciones':{
+        'anno': opciones.year,
+        'semestre':opciones.periodo
       },
       'colegio_id':this.getColegioId(),
     };
@@ -41,7 +45,7 @@ export class InformesService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateListaDeCurso(idFilter: number, subjects: any[]){
+  generateListaDeCurso(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -55,7 +59,7 @@ export class InformesService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateInasistenciaCurso(idFilter: number, subjects: any[]){
+  generateInasistenciaCurso(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -69,7 +73,7 @@ export class InformesService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateResumenCurso(idFilter: number, subjects: any[]){
+  generateResumenCurso(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -83,7 +87,7 @@ export class InformesService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateAsistenciaColegio(idFilter: number, subjects: any[]){
+  generateAsistenciaColegio(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -96,7 +100,7 @@ export class InformesService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateInformeExtranjeros(idFilter: number, subjects: any[]){
+  generateInformeExtranjeros(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -109,7 +113,7 @@ export class InformesService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateInformeIndigenas(idFilter: number, subjects: any[]){
+  generateInformeIndigenas(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,

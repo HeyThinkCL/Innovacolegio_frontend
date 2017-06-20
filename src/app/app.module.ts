@@ -125,6 +125,7 @@ import { DocumentosComponent } from './components/documentos/documentos.componen
 import { InformesComponent } from './components/documentos/informes/informes.component';
 import { Informes2Component } from './components/documentos/informes2/informes2.component';
 import { CertificadosComponent } from './components/documentos/certificados/certificados.component';
+import { Certificados2Component } from './components/documentos/certificados2/certificados2.component';
 import { CitacionesComponent } from './components/documentos/citaciones/citaciones.component';
 import { ByPlanesEstudioComponent } from './components/documentos/filtros/by-planes-estudio/by-planes-estudio.component';
 import { ByTipoEnsenanzaComponent } from './components/documentos/filtros/by-tipo-ensenanza/by-tipo-ensenanza.component';
@@ -184,6 +185,7 @@ import {DigitadorGuard,DigitadorGuardChild} from './guards/sesion-guards/digitad
 import {SostenedorGuard,SostenedorGuardChild} from './guards/sesion-guards/sostenedor.guard';
 import { AsistenciaColegioComponent } from './components/dashboard/charts/asistencia-colegio/asistencia-colegio.component';
 import { AlumnosColegioComponent } from './components/dashboard/charts/alumnos-colegio/alumnos-colegio.component';
+
 
 
 
@@ -295,6 +297,7 @@ import { AlumnosColegioComponent } from './components/dashboard/charts/alumnos-c
     RedirectComponent,
     AsistenciaColegioComponent,
     AlumnosColegioComponent,
+    Certificados2Component,
   ],
   imports: [
     BrowserModule,
