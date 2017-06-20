@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import {trigger,state,style,animate,transition} from '@angular/animations';
 
 import {MatriculaService} from '../../../../services/sistema/matricula.service';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
@@ -6,7 +7,45 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 @Component({
   selector: 'app-by-alumno',
   templateUrl: './by-alumno.component.html',
-  styleUrls: ['./by-alumno.component.css']
+  styleUrls: ['./by-alumno.component.css'],
+  animations: [
+    trigger(
+      'collapse', [
+        transition(':enter', [
+          style({height: '*', opacity: 0}),
+          animate('150ms', style({height: 0, opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({height: 0, 'opacity': 1}),
+          animate('150ms', style({height: '*', opacity: 0}))
+        ])
+      ]
+    ),
+    trigger(
+      'fade', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', 'opacity': 1}),
+          animate('150ms', style({transform: 'translateX(100%)', opacity: 0}))
+        ])
+      ]
+    ),
+    trigger(
+      'shrink', [
+        transition(':enter', [
+          style({transform: 'scale(0) ', opacity: 0}),
+          animate('150ms', style({transform: 'scale(1)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'scale(1)', 'opacity': 1}),
+          animate('150ms', style({transform: 'scale(0)', opacity: 0}))
+        ])
+      ]
+    )
+  ],
 })
 export class ByAlumnoComponent implements OnInit {
   @ViewChild('warningModal') warningModal: ModalComponent;

@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import {trigger,state,style,animate,transition} from '@angular/animations';
 
 import {InformesService} from '../../../services/documentos/informes.service';
 
@@ -8,7 +9,45 @@ import * as globalVar from '../../../globals';
 @Component({
   selector: 'app-informes2',
   templateUrl: './informes2.component.html',
-  styleUrls: ['./informes2.component.css']
+  styleUrls: ['./informes2.component.css'],
+  animations: [
+    trigger(
+      'collapse', [
+        transition(':enter', [
+          style({height: '*', opacity: 0}),
+          animate('150ms', style({height: 0, opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({height: 0, 'opacity': 1}),
+          animate('150ms', style({height: '*', opacity: 0}))
+        ])
+      ]
+    ),
+    trigger(
+      'fade', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', 'opacity': 1}),
+          animate('150ms', style({transform: 'translateX(100%)', opacity: 0}))
+        ])
+      ]
+    ),
+    trigger(
+      'shrink', [
+        transition(':enter', [
+          style({transform: 'scale(0) ', opacity: 0}),
+          animate('150ms', style({transform: 'scale(1)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'scale(1)', 'opacity': 1}),
+          animate('150ms', style({transform: 'scale(0)', opacity: 0}))
+        ])
+      ]
+    )
+  ],
 })
 export class Informes2Component implements OnInit {
   @ViewChild('modal') modal: ModalComponent;
@@ -226,7 +265,7 @@ export class Informes2Component implements OnInit {
         this.informesService.generateInformeNotas(d.filter,d.subjects).subscribe(res => {
           if(res && res.status){
             let url: string = globalVar.apiUrl+'/'+res.status;
-            window.open(url);
+            window.open(url,'_blank');
 
             let docIdx = this.docsToGenerate.findIndex(doc => doc.docId==d.docId);
             _wait[docIdx] = true;
@@ -320,7 +359,7 @@ export class Informes2Component implements OnInit {
         this.informesService.generateInformeIndigenas(d.filter,d.subjects).subscribe(res => {
           if(res && res.status){
             let url: string = globalVar.apiUrl+'/'+res.status;
-            window.open(url);
+            window.open(url,'_blank');
 
             let docIdx = this.docsToGenerate.findIndex(doc => doc.docId==d.docId);
             _wait[docIdx] = true;
@@ -331,6 +370,8 @@ export class Informes2Component implements OnInit {
         })
       }
     }
+
+    this.docsToGenerate = [];
 
   }
 

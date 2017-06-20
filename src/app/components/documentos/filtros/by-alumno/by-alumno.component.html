@@ -8,7 +8,7 @@
               Alumnos
             </h4>
           </div>
-          <div class="col-md-6" *ngIf="!collapse">
+          <div class="col-md-6" *ngIf="!collapse" [@shrink]="true">
             <div class="input-with-icon">
               <input class="form-control input-thick" type="text" placeholder="Buscar..." [(ngModel)]="filterData">
               <span class="icon icon-search input-icon"></span>
@@ -16,19 +16,20 @@
           </div>
           <div class="col-md-4">
             <div class="btn-group">
-              <button class="btn btn-info"
-                      (click)="collapse = !collapse"> Colapsar Lista
-              </button>
               <button class="btn btn-outline-primary"
                       *ngIf="!collapse"
+                      [@shrink]="true"
                       (click)="filterBySelection()"
                       [ngClass]="{'active': filterSelected.length>0 }"> Mostrar Seleccionados
+              </button>
+              <button class="btn btn-info"
+                      (click)="collapse = !collapse"> Colapsar Lista
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="panel-body" *ngIf="!(disabledSelect) && !collapse">
+      <div class="panel-body" *ngIf="alumnos.length>0 && !(disabledSelect) && !collapse" [@collapse]="true">
         <div class="table-responsive">
           <table class="table table-middle table-bordered table-hover">
             <thead>
