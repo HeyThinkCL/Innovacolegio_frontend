@@ -1,3 +1,5 @@
+/* Componente para Listar Asignaturas
+* Muestra todas las asignaturas asociadas al colegio */
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 

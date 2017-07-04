@@ -1,3 +1,4 @@
+/*Componente base modulo configuracion*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

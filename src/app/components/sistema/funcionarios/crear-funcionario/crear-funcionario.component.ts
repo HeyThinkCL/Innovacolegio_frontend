@@ -1,3 +1,7 @@
+/*componente rear-funcionario
+* muestr ael formulario de creacion de funcionarios
+*
+* los funcionarios director no pueden ser creados, ya que el director es único a cada institucion*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';

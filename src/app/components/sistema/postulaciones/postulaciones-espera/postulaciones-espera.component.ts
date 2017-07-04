@@ -1,3 +1,5 @@
+/*Componentes postulaciones espera
+* muestra exclusivamente las postulaciones que han sido clasificadas como lista de espera*/
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 

@@ -1,3 +1,6 @@
+/*Componente seleccion de colegio para sostenedor
+* se muestra solo luego del login de un usuario sostenedor
+* muestra los colegios asociados al sostenedor*/
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import {Observable} from "rxjs/Observable";

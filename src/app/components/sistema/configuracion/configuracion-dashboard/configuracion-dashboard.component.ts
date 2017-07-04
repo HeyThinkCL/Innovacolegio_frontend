@@ -1,3 +1,4 @@
+/*lista configuraciones disponibles*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }       from '@angular/common';

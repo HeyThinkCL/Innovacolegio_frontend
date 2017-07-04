@@ -1,3 +1,4 @@
+/*Componente base de sub-modulo asistencia*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 

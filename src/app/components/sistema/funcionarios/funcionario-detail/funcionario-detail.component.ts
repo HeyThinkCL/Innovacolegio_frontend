@@ -1,3 +1,5 @@
+/*componente detalle de funcionarios
+* muetra información de funcionarios con roles docentes y no docentes*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }       from '@angular/common';

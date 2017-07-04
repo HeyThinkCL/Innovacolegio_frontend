@@ -1,3 +1,7 @@
+/*Componente de Modificar Asignatura
+* Entrega información de la asignatura seleccionada
+* permite modificar el tipo de evaluacion de cada asignatura*/
+
 import {animate, Component, OnInit, style, transition, trigger, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { Location }       from '@angular/common';

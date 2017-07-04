@@ -1,3 +1,4 @@
+/*Componente base modilo colegios*/
 import {Component, OnInit } from '@angular/core';
 
 @Component({

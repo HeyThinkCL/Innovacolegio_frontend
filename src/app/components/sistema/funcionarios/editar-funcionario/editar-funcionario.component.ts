@@ -1,3 +1,8 @@
+/*Componete editar-funcionario
+* permite la modificacion de los datos de un funcionario
+*
+* permite asignar a un funcionario el rol de director el que, al ser unico, se le asignará al nuevo funcionario director
+* borrandose del director anterior*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';

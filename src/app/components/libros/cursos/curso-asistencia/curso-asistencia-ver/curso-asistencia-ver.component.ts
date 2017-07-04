@@ -1,3 +1,7 @@
+/*Componente ver asistencia
+* Muestra el mes actual y la lista de inasistentes por día
+* Al seleccionar un día habilitado muestra la lista de alumnos inasistentes de ese día
+* utiliza date-fns para generar calendario.*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 

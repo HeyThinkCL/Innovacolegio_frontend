@@ -1,3 +1,5 @@
+/*componente postulaciones-aceptadas
+* muestra exclusivamente las postulaciones que han sido aceptadas*/
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 

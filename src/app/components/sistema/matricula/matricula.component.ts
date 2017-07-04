@@ -1,3 +1,4 @@
+/*componetne bas de matriculas*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

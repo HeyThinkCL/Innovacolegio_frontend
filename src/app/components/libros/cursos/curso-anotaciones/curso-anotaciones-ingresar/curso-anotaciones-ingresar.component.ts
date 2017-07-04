@@ -1,3 +1,5 @@
+/*Componente Pestaña Ingresar-anotaciones
+* permite ingresar anotaciones indicando profesor, fecha, qlumno, etc*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';

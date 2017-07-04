@@ -1,3 +1,8 @@
+/*Componente de Informes
+ * permite la selección de los informes que se pueden generar en la plataforma.
+ * llama directamente a filtros por alumno y por curso
+ * Selección de un documento -> seleccion de las opciones pertinentes a cada documento -> selección del filtro -> selección del sujeto
+ * Los documentos a generar se encolan y son liberados una vez que se generan. */
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {trigger,state,style,animate,transition} from '@angular/animations';

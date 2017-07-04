@@ -1,3 +1,5 @@
+/*Componente pestaña anotaciones generales
+* muestra exclusivamente las anotaciones generales asociadas al curso*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 

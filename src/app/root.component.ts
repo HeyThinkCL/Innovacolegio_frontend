@@ -1,3 +1,4 @@
+/*Componente raiz de la plataforma*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

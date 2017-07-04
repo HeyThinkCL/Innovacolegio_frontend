@@ -1,3 +1,4 @@
+/*Componente base de modulo asignaturas*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

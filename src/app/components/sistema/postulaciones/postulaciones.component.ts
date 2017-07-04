@@ -1,3 +1,4 @@
+/*Componente base de postulaciones*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

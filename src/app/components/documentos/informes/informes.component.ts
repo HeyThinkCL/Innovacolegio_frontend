@@ -1,3 +1,7 @@
+/*Componente de Informes
+* permite la selección de los informes que se pueden generar en la plataforma.
+* llama directamente a filtros por alumno y por curso
+* version deprecada*/
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 

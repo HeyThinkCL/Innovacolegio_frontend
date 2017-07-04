@@ -1,3 +1,9 @@
+/*Componente Certificados.
+ * Muestra los certificados que pueden ser generados por la plataforma.
+ * Llama directamente a los filtros por curso y alumno.
+ * Selección de un documento -> seleccion de las opciones pertinentes a cada documento -> selección del filtro -> selección del sujeto
+ * Los documentos a generar se encolan y son liberados una vez que se generan. */
+
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {trigger,state,style,animate,transition} from '@angular/animations';

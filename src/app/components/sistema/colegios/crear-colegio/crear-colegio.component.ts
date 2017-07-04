@@ -1,3 +1,6 @@
+/*Componente crear-colegio
+* fomulario de creación de colegios
+* ncluye creacion de funcionario director*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';

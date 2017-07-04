@@ -1,3 +1,11 @@
+/*Componente ingresar asistencia
+ * Muestra el mes actual y permite ingresar las inasistencias del curso.
+ * Al seleccionar un día habilitado, se muestra la lista del curso, y se seleccionan los alumnos uno por uno
+ *
+ * Toma la configuracion de calendario academico para limitar los dias del calendario habilitados,
+ * Cruza la list de alumnos con la lista de inasistencia por día.
+ * Utiliza date-fns para generar el calendario como un arreglo de objetos dia.
+ * Navegación por mes.*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 

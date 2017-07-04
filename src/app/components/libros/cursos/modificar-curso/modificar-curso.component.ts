@@ -1,3 +1,6 @@
+/*Componente modificar curso
+* Permite asignar profesor jefe al curso
+* Permite manejo de asignaturas asociadas al curso (muestra solo asignaturas del plan de estudios del curso)*/
 import {Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common'
 import { ActivatedRoute, Params } from '@angular/router';

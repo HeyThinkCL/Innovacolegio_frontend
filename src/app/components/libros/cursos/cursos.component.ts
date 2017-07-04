@@ -1,3 +1,4 @@
+/*Componente base de modulo libros de clases*/
 import {Component, OnInit } from '@angular/core';
 
 @Component({

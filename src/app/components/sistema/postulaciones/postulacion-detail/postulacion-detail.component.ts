@@ -1,3 +1,5 @@
+/*componente detalles postulacion
+* muestra informacion del postulante y apoderados*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }       from '@angular/common';

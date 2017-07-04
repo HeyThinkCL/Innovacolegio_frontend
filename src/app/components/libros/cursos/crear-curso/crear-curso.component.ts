@@ -1,3 +1,6 @@
+/*Componente para crear curso
+* permite crear curso seleccionando planes de estudio, tipo de enseñanza y año
+* La 'letra' del curso se asigna automáticamente en base al nivel seleccionado y los cursos ya existentes en ese nivel*/
 import {Component, OnInit, ViewChild } from '@angular/core';
 import {Router} from "@angular/router";
 import { Location } from '@angular/common'

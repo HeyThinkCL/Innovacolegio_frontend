@@ -1,3 +1,6 @@
+/*Componente que lista cursos asociads al colegio
+*
+* Permite preparar cursos (preparar cursos en base de daatos y asignar numero de lista a alumnos del curso)*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';

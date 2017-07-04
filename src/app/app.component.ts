@@ -1,3 +1,5 @@
+/*Componente base de la plataforma
+* Llama a las configuraciones realizadas para la plataforma, y muestr ainformacion del colegio seleccionado*/
 import {Component, HostListener, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/pairwise';

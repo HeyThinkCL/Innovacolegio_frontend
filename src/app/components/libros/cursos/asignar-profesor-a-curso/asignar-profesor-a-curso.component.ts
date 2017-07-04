@@ -1,3 +1,5 @@
+/*Componente para asignar un profesor jefe a un curso.
+* Lista profesores del colegio y permite seleccionar unpo para jefatura */
 import {Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common'
 import { ActivatedRoute, Params } from '@angular/router';

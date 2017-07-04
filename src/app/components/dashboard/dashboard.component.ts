@@ -1,3 +1,4 @@
+/* Componente Dashboard */
 import { Component, OnInit } from '@angular/core';
 
 import { connectionErrorMsg } from '../spinner/spinner.component';

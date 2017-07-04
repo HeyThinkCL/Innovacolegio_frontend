@@ -1,3 +1,4 @@
+/*permite la creación de asignaturas especiales asociadas a un plan de estudios*/
 import { Component, OnInit, ViewChild, trigger, transition, style, animate } from '@angular/core';
 import { Location } from '@angular/common';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';

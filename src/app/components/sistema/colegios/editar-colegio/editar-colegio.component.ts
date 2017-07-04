@@ -1,3 +1,7 @@
+/*Componente editar colegio
+* Permite editar información ingresada por colegio
+* formulario de datos
+* utiliza selección restringida de division politica administrativa y depto provincial*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }       from '@angular/common';

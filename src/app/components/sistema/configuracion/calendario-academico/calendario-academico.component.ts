@@ -1,3 +1,7 @@
+/*config calendario academico
+* permite seleccion de cantidad de periodos academicos en el año, ingresando fechas limites
+* permite ingresar periodos de vacaciones y fechas especiales únicas*/
+
 import { Component, OnInit, ViewChild, trigger, transition, style, animate } from '@angular/core';
 import { Location } from '@angular/common';
 import {ModalComponent} from 'ng2-bs3-modal/ng2-bs3-modal';

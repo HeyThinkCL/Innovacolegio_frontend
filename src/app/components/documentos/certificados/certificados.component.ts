@@ -1,3 +1,7 @@
+/*Componente Certificados.
+* Muestra los certificados que pueden ser generados por la plataforma.
+* Llama directamente a los filtros por curso y alumno.
+* Versión deprecada.*/
 import {Component, OnInit, ViewChild} from '@angular/core';
 
 import {CertificadosService} from '../../../services/documentos/certificados.service';

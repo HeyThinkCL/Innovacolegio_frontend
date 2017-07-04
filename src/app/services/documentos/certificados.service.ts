@@ -27,7 +27,7 @@ export class CertificadosService {
     return JSON.parse(localStorage.getItem('currentUser')).userRol;
   }
 
-  generateAlumnoRegular(idFilter: number, subjects: any[]){
+  generateAlumnoRegular(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -41,7 +41,7 @@ export class CertificadosService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateMatricula(idFilter: number, subjects: any[]){
+  generateMatricula(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -55,7 +55,7 @@ export class CertificadosService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateInscripcion(idFilter: number, subjects: any[]){
+  generateInscripcion(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -69,7 +69,7 @@ export class CertificadosService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateAsistencia(idFilter: number, subjects: any[]){
+  generateAsistencia(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,
@@ -83,7 +83,7 @@ export class CertificadosService {
       .catch((error:any) => Observable.throw(error.json().error || error.status));
   }
 
-  generateTraslado(idFilter: number, subjects: any[]){
+  generateTraslado(idFilter: number, subjects: any[], opciones: any = {year:null,periodo:null}){
     let payload = {
       'filtro': {
         'id': idFilter,

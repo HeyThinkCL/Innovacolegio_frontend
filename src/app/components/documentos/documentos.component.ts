@@ -1,3 +1,4 @@
+/*Componente root para documentos*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

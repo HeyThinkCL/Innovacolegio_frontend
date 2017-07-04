@@ -1,3 +1,4 @@
+/*componente modifcacion datos de postulacion*/
 import { Component, OnInit, ViewChild, trigger, transition, style, animate  } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }       from '@angular/common';

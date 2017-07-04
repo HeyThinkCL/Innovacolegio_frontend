@@ -1,3 +1,6 @@
+/*Componente lista de curso
+* muestra los alumnos asociados al curso seleecionado
+* permite activar o desactivar alumnos en el curso*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';

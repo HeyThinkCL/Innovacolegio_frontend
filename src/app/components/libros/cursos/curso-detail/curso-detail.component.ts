@@ -1,3 +1,5 @@
+/*Componente base para libro de clases
+* Muestra información acerca del curso seleccionado*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 

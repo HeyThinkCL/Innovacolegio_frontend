@@ -1,3 +1,5 @@
+/*cofig notas y ponderaciones
+* permite selección de escalas de evaluacion, numero de decimales a mostrar y tipo de aproximacion*/
 import { Component, OnInit, ViewChild, trigger, transition, style, animate } from '@angular/core';
 import { Location } from '@angular/common';
 import { Select2OptionData } from 'ng2-select2';

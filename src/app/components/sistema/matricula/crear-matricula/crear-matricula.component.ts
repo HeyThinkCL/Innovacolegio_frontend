@@ -1,3 +1,5 @@
+/*componente crear matricula
+* muestra el formulario de creacion de matriculas, toma una postulacion aceptada y permite crear una nueva matricula*/
 import { Component, OnInit, ViewChild, trigger, transition, style, animate } from '@angular/core';
 import { Location } from '@angular/common';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';

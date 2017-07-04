@@ -1,3 +1,5 @@
+/*Componente pestaña curso-anotaciones
+* muestra las anotaciones asociadas a los alumnos del curso seleccionado*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 

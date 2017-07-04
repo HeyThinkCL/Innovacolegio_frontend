@@ -1,3 +1,6 @@
+/*Componente de gráfico para dashboard.
+Muestra la asistencia de los colegios por mes.
+Gráficos basados en Chart.js */
 import { Component, OnInit } from '@angular/core';
 
 import {DashboardService} from '../../../../services/dashboard.service'

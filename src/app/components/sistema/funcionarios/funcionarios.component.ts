@@ -1,3 +1,4 @@
+/*Componente base modulo funcionarios*/
 import { Component, OnInit } from '@angular/core';
 
 @Component({

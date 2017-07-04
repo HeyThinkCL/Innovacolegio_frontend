@@ -1,3 +1,6 @@
+/*Componente de gráfico para dashboard.
+ Muestra el gráfico de torta de cantidad de alumnos por curso en el colegio.
+ Gráficos basados en Chart.js */
 import { Component, OnInit } from '@angular/core';
 import {CursosService} from "../../../../services/libros/cursos.service";
 

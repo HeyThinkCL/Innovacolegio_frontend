@@ -1,3 +1,8 @@
+/*Componente ver notas
+* Muestra las asignaturas del curso y las notas asociadas a cada asignatura y a cada alumno
+*
+* Permite obtener información de evaluaciones, notas actualizadas y cálculo automático de los promedios
+* segun información de tipo de evaluación de la asignatura, se muestra evaluación numérica o conceptual*/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';

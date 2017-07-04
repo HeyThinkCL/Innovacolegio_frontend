@@ -1,3 +1,5 @@
+/*Componente spinner básico con animación*/
+/*Actualizar animación a angular/animations*/
 import { Component, OnInit, Input, trigger, transition, style, animate, keyframes } from '@angular/core';
 
 @Component({

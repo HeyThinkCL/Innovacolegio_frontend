@@ -1,3 +1,5 @@
+/*Configuracion planes de enseñanza
+* configurcion única de planes de estudio, tipos de enseñanza y cantidad de cursos por nivel*/
 import { Component, OnInit, ViewChild, trigger, transition, style, animate } from '@angular/core';
 import { Location } from '@angular/common';
 import { Select2OptionData } from 'ng2-select2';

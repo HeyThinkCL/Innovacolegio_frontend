@@ -1,3 +1,5 @@
+/*Componente editar matricula
+* permite editar información del formulario matricula y apoderados*/
 import { Component, OnInit, ViewChild, trigger, transition, style, animate  } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }       from '@angular/common';
